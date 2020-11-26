@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<program xmlns="test:dysnow">
+    <puts>this is what we want to see on the output</puts>
+</program>
