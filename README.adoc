@@ -1,0 +1,47 @@
+= Universal Scripting Engine
+
+If you want to implement scripting into your application you have to choose a scripting engine, or you can create your own solution.
+Creating your own solution needs some syntax analysis, building an abstract syntax tree (AST) and then an engine that executes the AST.
+
+This Universal Script Engine (USENG) is an engine that implements the second part of the scripting.
+To make it as universal as possible the AST used is XML Document structure.
+It also means that you can use and XML parser as a simple front-end, which may be good for some specific cases.
+Useng is not meant to be scripted in XML, except for experimenting and for testing.
+If you need XML scripting with a rich set of commands you may have a look at Apache Jelly.
+
+Useng is mainly to embed into an application.
+Useng has a limited set of commands that the embedding application may opt to use or totally ignore.
+Embedding application can easily define their own commands.
+A typical application uses a subset of the provided commands that provide basic programming constructs, like
+
+* variable handling
+
+* loop constructs
+
+* conditional execution
+
+* basic arithmetic
+
+and add the domain specific command.
+
+A typical embedding application will use the scripting with these simple steps:
+
+1. Load the script from some source.
+
+2. Create a scripting processor object
+
+3. Register some of the shipped commands and some local commands.
+
+4. Execute the script.
+
+The following code shows these steps.
+
+[source,java]
+----
+final org.w3c.dom.Document doc = ... get the document from some source ...
+try (final var processor = new Processor(null)) {
+    Register.withProcessor(processor).registerBasicCommands("useng:basic");
+    processor.commandRegister().register("myApp:namespace", new MyCommand());
+    processor.process(doc);
+}
+----
