@@ -1,0 +1,9 @@
+<Script xmlns="useng:basic">
+    <Expected xmlns="test">2</Expected>
+    <Puts trim="true">
+        <Add>
+            <BigDecimal>1</BigDecimal>
+            <BigDecimal>1</BigDecimal>
+        </Add>
+    </Puts>
+</Script>

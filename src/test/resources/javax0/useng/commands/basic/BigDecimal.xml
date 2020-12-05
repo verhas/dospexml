@@ -1,0 +1,18 @@
+<Script xmlns="useng:basic">
+    <Expected xmlns="test"><![CDATA[1
+        1
+        1.0
+        1
+        1
+        1
+        0.0000]]></Expected>
+    <Puts trim="true">
+        <BigDecimal><Integer>1</Integer></BigDecimal>
+        <BigDecimal><Long>1</Long></BigDecimal>
+        <BigDecimal><Double>1</Double></BigDecimal>
+        <BigDecimal><BigDecimal>1</BigDecimal></BigDecimal>
+        <BigDecimal><String>1</String></BigDecimal>
+        <BigDecimal><![CDATA[1]]></BigDecimal>
+        <BigDecimal>0000.0000</BigDecimal>
+    </Puts>
+</Script>

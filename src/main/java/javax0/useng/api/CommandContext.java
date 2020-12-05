@@ -14,6 +14,8 @@ public interface CommandContext {
 
     <T> GlobalContext<T> globalContext();
 
+    ExecutionException exception(String message);
+
     Processor processor();
 
     List<Node> nodeList();

@@ -16,14 +16,14 @@ public class If implements NamedCommand<Object> {
             .orElseThrow(() -> new ExecutionException("If needs a condition"));
         Node thenNode = Xml.child(ctx.node(), ctx.nameSpace().orElse(null), "then")
             .orElseThrow(() -> new ExecutionException("If needs a then"));
-        Node elseNode = Xml.child(ctx.node(), ctx.nameSpace().orElse(null), "then")
+        Node elseNode = Xml.child(ctx.node(), ctx.nameSpace().orElse(null), "else")
             .orElse(null);
         final var conditionCode = Xml.child(conditionNode, 0)
             .orElseThrow(() -> new ExecutionException("Condition needs a boolean expression in if."));
 
         CommandResult<Boolean> condition = ctx.process(conditionCode);
         if (condition.type() != Boolean.class) {
-            throw new ExecutionException("The condition of an IF has to be boolean");
+            throw ctx.exception("The condition of an IF has to be boolean");
         }
 
         if (condition.get()) {

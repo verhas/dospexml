@@ -5,6 +5,7 @@ import javax0.useng.api.CommandResult;
 import javax0.useng.api.ExecutionException;
 import javax0.useng.api.NamedCommand;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
@@ -41,7 +42,9 @@ public class Compare {
         for (int i = 0; i < results.size() - 1; i++) {
             final var a = results.get(i).get();
             final var b = results.get(i + 1).get();
-            if (a instanceof Number && b instanceof Number && !(a instanceof Double && b instanceof Double)) {
+            if (a instanceof Number && b instanceof Number &&
+                !(a instanceof Double || b instanceof Double
+                || a instanceof BigDecimal || b instanceof BigDecimal)) {
                 if (!numberPredicate.test(((Number) a).longValue(), ((Number) b).longValue())) {
                     return CommandResult.FALSE;
                 }

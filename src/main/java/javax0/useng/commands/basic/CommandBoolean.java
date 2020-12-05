@@ -15,6 +15,13 @@ public class CommandBoolean implements NamedCommand<Boolean> {
 
     @Override
     public CommandResult<Boolean> evaluate(CommandContext ctx, List<CommandResult<?>> results) {
+        final var result = results.get(0);
+        if (result.type() == Boolean.class) {
+            return (CommandResult<Boolean>) result;
+        }
+        if( result.get() instanceof Number ){
+            return CommandResult.simple(((Number) result.get()).intValue() != 0);
+        }
         final var d = Boolean.parseBoolean((String) results.get(0).get());
         return CommandResult.simple(d);
     }

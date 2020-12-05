@@ -14,7 +14,7 @@ public class Null implements NamedCommand<Object> {
         try {
             klass = Class.forName(type);
         } catch (ClassNotFoundException e) {
-            throw new ExecutionException("Type name " + type + " is not a valid class name");
+            throw ctx.exception("Type name " + type + " is not a valid class name");
         }
         return CommandResult.simple(null, klass);
     }

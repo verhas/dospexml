@@ -62,10 +62,10 @@ public interface Command<RET> {
         final var nodes = ctx.nodeList();
         final var manager = argumentManager();
         if (manager.min() >= 0 && manager.min() > nodes.size()) {
-            throw new ExecutionException("Command {" + ctx.node().getNamespaceURI() + "}" + ctx.node().getLocalName() + " needs minimum " + manager.min() + " arguments and has " + nodes.size());
+            throw ctx.exception("Command {" + ctx.node().getNamespaceURI() + "}" + ctx.node().getLocalName() + " needs minimum " + manager.min() + " arguments and has " + nodes.size());
         }
         if (manager.max() >= 0 && manager.max() < nodes.size()) {
-            throw new ExecutionException("Command {" + ctx.node().getNamespaceURI() + "}" + ctx.node().getLocalName() + " needs maximum " + manager.max() + " arguments and has " + nodes.size());
+            throw ctx.exception("Command {" + ctx.node().getNamespaceURI() + "}" + ctx.node().getLocalName() + " needs maximum " + manager.max() + " arguments and has " + nodes.size());
         }
 
         final var results = new ArrayList<CommandResult<?>>();

@@ -4,6 +4,7 @@ import javax0.useng.api.CommandContext;
 import javax0.useng.api.CommandResult;
 import javax0.useng.api.NamedCommand;
 import javax0.useng.commands.TextArgumentManager;
+import javax0.useng.support.Convert;
 
 import java.util.List;
 
@@ -19,11 +20,7 @@ public class CommandLong implements NamedCommand<Long> {
         if (result.type() == Long.class) {
             return (CommandResult<Long>) result;
         }
-        if (result.type() == String.class) {
-            final var d = Long.parseLong((String) result.get());
-            return CommandResult.simple(d, Long.class);
-        }
-        return CommandResult.simple((Long) result.get(), Long.class);
+        return CommandResult.simple(Convert.toLong(result));
     }
 
     @Override

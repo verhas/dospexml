@@ -4,6 +4,7 @@ import javax0.useng.api.CommandContext;
 import javax0.useng.api.CommandResult;
 import javax0.useng.api.NamedCommand;
 import javax0.useng.commands.TextArgumentManager;
+import javax0.useng.support.Convert;
 
 import java.util.List;
 
@@ -19,11 +20,7 @@ public class CommandInteger implements NamedCommand<Integer> {
         if (result.type() == Integer.class) {
             return (CommandResult<Integer>) result;
         }
-        if (result.type() == String.class) {
-            final var d = Integer.parseInt((String) result.get());
-            return CommandResult.simple(d, Integer.class);
-        }
-        return CommandResult.simple((Integer) result.get(), Integer.class);
+        return CommandResult.simple(Convert.toInt(result));
     }
 
     @Override

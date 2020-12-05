@@ -12,7 +12,7 @@ public class Not implements NamedCommand<Boolean> {
     public CommandResult<Boolean> evaluate(CommandContext ctx, List<CommandResult<?>> results) {
         final var result = results.get(0);
         if (result.type() != Boolean.class) {
-            throw new ExecutionException("Not needs a Boolean argument");
+            throw ctx.exception("Not needs a Boolean argument");
         }
         return CommandResult.simple(!(Boolean) result.get(), Boolean.class);
     }

@@ -4,27 +4,34 @@ import javax0.useng.api.CommandContext;
 import javax0.useng.api.CommandResult;
 import javax0.useng.api.ExecutionException;
 import javax0.useng.api.NamedCommand;
+import javax0.useng.support.Convert;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
-public class Add implements NamedCommand<Object> {
+public class Add implements NamedCommand<Number> {
 
     @Override
-    public CommandResult<Object> evaluate(CommandContext ctx, List<CommandResult<?>> results) {
+    public CommandResult<Number> evaluate(CommandContext ctx, List<CommandResult<?>> results) {
         boolean hasDouble = false;
+        boolean hasBigDecimal = false;
         boolean hasLong = false;
         for (final var result : results) {
             if (result.type() == BigDecimal.class) {
-                return addBigDecimals(results);
-            }
-            if (result.type() == Double.class) {
+                hasBigDecimal = true;
+                break;// this is the highest priority, we convert all to BigDecimal in this case
+            } else if (result.type() == Double.class) {
                 hasDouble = true;
             } else if (result.type() == Long.class) {
                 hasLong = true;
             } else if (result.type() != Integer.class) {
-                throw new ExecutionException("I do not know how to add " + result.type());
+                throw ctx.exception("I do not know how to add " + result.type());
             }
+        }
+        if (hasBigDecimal) {
+            return addBigDecimals(results);
         }
         if (hasDouble) {
             return addDoubles(results);
@@ -35,45 +42,31 @@ public class Add implements NamedCommand<Object> {
         return addInts(results);
     }
 
-    private CommandResult<Object> addBigDecimals(List<CommandResult<?>> results) {
-        final BigDecimal accumulator = BigDecimal.ZERO;
+    private static <T extends Number> CommandResult<T> addAll(List<CommandResult<?>> results,
+                                                              T accumulator,
+                                                              Function<CommandResult<?>, T> converter,
+                                                              BiFunction<T, T, T> sum) {
         for (final var result : results) {
-            final BigDecimal operand;
-            if (result.type() == BigDecimal.class) {
-                operand = (BigDecimal) result.get();
-            } else if (result.type() == Double.class) {
-                operand = BigDecimal.valueOf((Double) result.get());
-            } else {
-                operand = BigDecimal.valueOf((Long) result.get());
-            }
-            accumulator.add(operand);
+            accumulator = sum.apply(accumulator, converter.apply(result));
         }
         return CommandResult.simple(accumulator);
     }
 
-
-    private CommandResult<Object> addDoubles(List<CommandResult<?>> results) {
-        Double accumulator = 0.0;
-        for (final var result : results) {
-            accumulator += (Double) result.get();
-        }
-        return CommandResult.simple(accumulator);
+    private static <T extends Number> CommandResult<T> addBigDecimals(List<CommandResult<?>> results) {
+        return (CommandResult<T>) addAll(results, BigDecimal.ZERO, Convert::toBigDecimal, (a, d) -> a.add(d));
     }
 
-    private CommandResult<Object> addLongs(List<CommandResult<?>> results) {
-        long accumulator = 0L;
-        for (final var result : results) {
-            accumulator += ((Number) result.get()).longValue();
-        }
-        return CommandResult.simple(accumulator);
+
+    private static <T extends Number> CommandResult<T> addDoubles(List<CommandResult<?>> results) {
+        return (CommandResult<T>) addAll(results, 0.0, Convert::toDouble, (a, d) -> a + d);
     }
 
-    private CommandResult<Object> addInts(List<CommandResult<?>> results) {
-        int accumulator = 0;
-        for (final var result : results) {
-            accumulator += (Integer) result.get();
-        }
-        return CommandResult.simple(accumulator);
+    private static <T extends Number> CommandResult<T> addLongs(List<CommandResult<?>> results) {
+        return (CommandResult<T>) addAll(results, 0L, Convert::toLong, (a, d) -> a + d);
+    }
+
+    private static <T extends Number> CommandResult<T> addInts(List<CommandResult<?>> results) {
+        return (CommandResult<T>) addAll(results, 0, Convert::toInt, (a, d) -> a + d);
     }
 
 }

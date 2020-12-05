@@ -21,6 +21,7 @@ public class XmlInput implements Input {
         doc = db.parse(is);
     }
 
+
     public XmlInput(String string) throws ParserConfigurationException, IOException, SAXException {
         this(new ByteArrayInputStream(string.getBytes(StandardCharsets.UTF_8)));
     }

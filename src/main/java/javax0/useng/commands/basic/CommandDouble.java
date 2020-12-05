@@ -4,6 +4,7 @@ import javax0.useng.api.CommandContext;
 import javax0.useng.api.CommandResult;
 import javax0.useng.api.NamedCommand;
 import javax0.useng.commands.TextArgumentManager;
+import javax0.useng.support.Convert;
 
 import java.util.List;
 
@@ -19,11 +20,7 @@ public class CommandDouble implements NamedCommand<Double> {
         if (result.type() == Double.class) {
             return (CommandResult<Double>) result;
         }
-        if (result.type() == String.class) {
-            final var d = Double.parseDouble((String) result.get());
-            return CommandResult.simple(d, Double.class);
-        }
-        return CommandResult.simple((Double) result.get(), Double.class);
+        return CommandResult.simple(Convert.toDouble(result));
     }
 
     @Override

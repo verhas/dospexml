@@ -11,10 +11,10 @@ public class Require implements NamedCommand<Void> {
     public CommandResult<Void> execute(CommandContext ctx) {
         final var requiredVersion = ctx.intParameter("version").orElseThrow(() -> new ExecutionException("Require command needs an int version attribute"));
         if (requiredVersion > Version.VERSION) {
-            throw new ExecutionException("Current version is too low, it is " + Version.VERSION + " and the script needs " + requiredVersion);
+            throw ctx.exception("Current version is too low, it is " + Version.VERSION + " and the script needs " + requiredVersion);
         }
         if (requiredVersion < Version.ACCEPTS) {
-            throw new ExecutionException("Accepted version is too high, it is " + Version.ACCEPTS + " and the script needs " + requiredVersion);
+            throw ctx.exception("Accepted version is too high, it is " + Version.ACCEPTS + " and the script needs " + requiredVersion);
         }
         return null;
     }

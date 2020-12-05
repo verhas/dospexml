@@ -10,7 +10,7 @@ import java.util.Set;
 public class DynamicQueryMap<K, V> implements AutoCloseable, Query<K, V> {
 
     private MapHolder<K, V> head = null;
-    private Map<K, V> globalMap = new HashMap<>();
+    private final Map<K, V> globalMap = new HashMap<>();
 
     @Override
     public boolean containsKey(K key) {

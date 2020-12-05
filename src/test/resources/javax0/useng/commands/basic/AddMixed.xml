@@ -1,0 +1,38 @@
+<Script xmlns="useng:basic">
+    <Expected xmlns="test"><![CDATA[4.0
+3.0
+2]]></Expected>
+    <Puts trim="true" trail="\n">
+        <Add>
+            <BigDecimal>1</BigDecimal>
+            <Integer>1</Integer>
+            <Long>1</Long>
+            <Double>1</Double>
+        </Add>
+    </Puts>
+    <Puts trim="true" trail="\n">
+        <Add>
+            <Integer>1</Integer>
+            <Long>1</Long>
+            <Double>1</Double>
+        </Add>
+    </Puts>
+    <Puts trim="true">
+        <Add>
+            <Integer>1</Integer>
+            <Long>1</Long>
+        </Add>
+    </Puts>
+    <Throws xmlns="test">
+        <Add xmlns="useng:basic">
+            <String>1</String>
+            <Long>1</Long>
+        </Add>
+    </Throws>
+    <Throws xmlns="test">
+        <Add xmlns="useng:basic">
+            <String>1</String>
+            <Long>1</Long>
+        </Add>
+    </Throws>
+</Script>

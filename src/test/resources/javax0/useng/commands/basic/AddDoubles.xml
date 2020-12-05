@@ -1,0 +1,9 @@
+<Script xmlns="useng:basic">
+    <Expected xmlns="test">2.0</Expected>
+    <Puts trim="true">
+        <Add>
+            <Double>1</Double>
+            <Double>1</Double>
+        </Add>
+    </Puts>
+</Script>

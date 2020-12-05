@@ -13,7 +13,7 @@ public class Variable implements NamedCommand<Variable.VariableHolder> {
             case "dynamic" -> ctx.<String, VariableHolder>dynamicQuery("variables");
             default -> ctx.<String, VariableHolder>staticQuery("variables");
         };
-        final var variableHolder = query.exportIfAbsent(name, (s) -> new VariableHolder());
+        final var variableHolder = query.export(name, new VariableHolder());
         return CommandResult.simple(variableHolder);
     }
 

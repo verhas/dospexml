@@ -2,6 +2,7 @@ package javax0.useng.engine;
 
 import javax0.useng.api.CommandContext;
 import javax0.useng.api.CommandResult;
+import javax0.useng.api.ExecutionException;
 import javax0.useng.api.Processor;
 import javax0.useng.api.Query;
 import org.w3c.dom.NamedNodeMap;
@@ -23,13 +24,13 @@ public class SimpleCommandContext implements CommandContext {
     public SimpleCommandContext(javax0.useng.engine.Processor processor,
                                 Node node,
                                 GlobalContext globalContext,
-                                boolean needsTextSegment) {
+                                boolean needsAllChildrenNodes) {
         this.processor = processor;
         this.nodeList = new ArrayList<>();
         final var childNodes = node.getChildNodes();
         final var numberOfNodes = childNodes.getLength();
         for (int i = 0; i < numberOfNodes; i++) {
-            if (childNodes.item(i).getNodeType() != Node.TEXT_NODE || needsTextSegment) {
+            if (collectibleNonTextNode(childNodes.item(i)) || needsAllChildrenNodes) {
                 this.nodeList.add(childNodes.item(i));
             }
         }
@@ -38,6 +39,19 @@ public class SimpleCommandContext implements CommandContext {
         this.attributes = node.getAttributes();
         this.node = node;
         this.globalContext = globalContext;
+    }
+
+    private static boolean collectibleNonTextNode(Node node) {
+        return node.getNodeType() != Node.TEXT_NODE &&
+            node.getNodeType() != Node.PROCESSING_INSTRUCTION_NODE &&
+            node.getNodeType() != Node.COMMENT_NODE &&
+            node.getNodeType() != Node.CDATA_SECTION_NODE &&
+            node.getNodeType() != Node.ATTRIBUTE_NODE;
+    }
+
+    @Override
+    public ExecutionException exception(final String message) {
+        throw new ExecutionException(message, this);
     }
 
     @Override

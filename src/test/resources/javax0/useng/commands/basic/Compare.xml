@@ -1,0 +1,564 @@
+<Script xmlns="useng:basic">
+    <Expected xmlns="test"><![CDATA[165398 == 165398 Integer
+165398 == 165398 Long
+165398 == 165398 BigDecimal
+165398 == 165398 Double
+165399 != 165398 Integer
+165399 != 165398 Long
+165399 != 165398 BigDecimal
+165399 != 165398 Double
+165399 != String Double
+165399 != String Double
+3 is < 4
+4 is not < 3 Integer
+3 is < 4 Double
+4 is not < 3 Double
+3 is < 4 BigDecimal
+4 is not < 3 BigDecimal
+3 is < 4
+4 is not < 3 Integer
+3 is < 4 Double
+4 is not < 3 Double
+3 is < 4 BigDecimal
+4 is not < 3 BigDecimal
+3 is <= 3
+3 is <= 4
+4 is not <= 3 Integer
+3 is <= 4 Double
+4 is not <= 3 Double
+3 is <= 4 BigDecimal
+4 is not <= 3 BigDecimal
+3 is <= 4
+3 is <= 4
+4 is not <= 3 Integer
+3 is <= 4 Double
+4 is not <= 3 Double
+3 is <= 4 BigDecimal
+4 is not < 3 BigDecimal
+]]></Expected>
+    <Block name="Equals">
+        <If>
+            <condition>
+                <Equals>
+                    <Integer>165398</Integer>
+                    <Integer>165398</Integer>
+                </Equals>
+            </condition>
+            <then>
+                <Puts><![CDATA[165398 == 165398 Integer
+]]></Puts>
+            </then>
+            <else>
+                <Throw>165398 != 165398 Integer</Throw>
+            </else>
+        </If>
+        <If>
+            <condition>
+                <Equals>
+                    <Long>165398</Long>
+                    <Long>165398</Long>
+                </Equals>
+            </condition>
+            <then>
+                <Puts><![CDATA[165398 == 165398 Long
+]]></Puts>
+            </then>
+            <else>
+                <Throw>165398 != 165398 Long</Throw>
+            </else>
+        </If>
+        <If>
+            <condition>
+                <Equals>
+                    <BigDecimal>165398</BigDecimal>
+                    <BigDecimal>165398</BigDecimal>
+                </Equals>
+            </condition>
+            <then>
+                <Puts><![CDATA[165398 == 165398 BigDecimal
+]]></Puts>
+            </then>
+            <else>
+                <Throw>165398 != 165398 BigDecimal</Throw>
+            </else>
+        </If>
+        <If>
+            <condition>
+                <Equals>
+                    <Double>165398</Double>
+                    <Double>165398</Double>
+                </Equals>
+            </condition>
+            <then>
+                <Puts><![CDATA[165398 == 165398 Double
+]]></Puts>
+            </then>
+            <else>
+                <Throw>165398 != 165398 Double</Throw>
+            </else>
+        </If>
+
+
+        <If>
+            <condition>
+                <Equals>
+                    <Integer>165399</Integer>
+                    <Integer>165398</Integer>
+                </Equals>
+            </condition>
+            <then>
+                <Throw>165399 == 165398 Integer</Throw>
+            </then>
+            <else>
+                <Puts><![CDATA[165399 != 165398 Integer
+]]></Puts>
+            </else>
+        </If>
+        <If>
+            <condition>
+                <Equals>
+                    <Long>165399</Long>
+                    <Long>165398</Long>
+                </Equals>
+            </condition>
+            <then>
+                <Throw>165399 == 165398 Long</Throw>
+            </then>
+            <else>
+                <Puts><![CDATA[165399 != 165398 Long
+]]></Puts>
+            </else>
+        </If>
+        <If>
+            <condition>
+                <Equals>
+                    <BigDecimal>165399</BigDecimal>
+                    <BigDecimal>165398</BigDecimal>
+                </Equals>
+            </condition>
+            <then>
+                <Throw>165399 == 165398 BigDecimal</Throw>
+            </then>
+            <else>
+                <Puts><![CDATA[165399 != 165398 BigDecimal
+]]></Puts>
+            </else>
+        </If>
+        <If>
+            <condition>
+                <Equals>
+                    <Double>165399</Double>
+                    <Double>165398</Double>
+                </Equals>
+            </condition>
+            <then>
+                <Throw>165399 == 165398 Double</Throw>
+            </then>
+            <else>
+                <Puts><![CDATA[165399 != 165398 Double
+]]></Puts>
+            </else>
+        </If>
+        <If>
+            <condition>
+                <Equals>
+                    <String>165399</String>
+                    <String>165398</String>
+                </Equals>
+            </condition>
+            <then>
+                <Throw>165399 == 165398 String</Throw>
+            </then>
+            <else>
+                <Puts><![CDATA[165399 != String Double
+]]></Puts>
+            </else>
+        </If>
+        <If>
+            <condition>
+                <Equals>
+                    <String>165398</String>
+                    <String>165398</String>
+                </Equals>
+            </condition>
+            <then>
+                <Puts><![CDATA[165399 != String Double
+]]></Puts>
+            </then>
+            <else>
+                <Throw>165399 == 165398 String</Throw>
+            </else>
+        </If>
+
+
+    </Block>
+    <Block test="Less">
+        <If>
+            <condition>
+                <Less>
+                    <Integer>3</Integer>
+                    <Integer>4</Integer>
+                </Less>
+            </condition>
+            <then>
+                <Puts><![CDATA[3 is < 4
+]]></Puts>
+            </then>
+        </If>
+        <If>
+            <condition>
+                <Less>
+                    <Integer>4</Integer>
+                    <Integer>3</Integer>
+                </Less>
+            </condition>
+            <then>
+                <Throw><![CDATA[Test Failed, 4 is < 3 Integer]]></Throw>
+            </then>
+            <else>
+                <Puts><![CDATA[4 is not < 3 Integer
+]]></Puts>
+            </else>
+        </If>
+
+        <If>
+            <condition>
+                <Less>
+                    <Double>3</Double>
+                    <Double>4</Double>
+                </Less>
+            </condition>
+            <then>
+                <Puts><![CDATA[3 is < 4 Double
+]]></Puts>
+            </then>
+        </If>
+        <If>
+            <condition>
+                <Less>
+                    <Double>4</Double>
+                    <Double>3</Double>
+                </Less>
+            </condition>
+            <then>
+                <Throw><![CDATA[Test Failed, 4 is < 3 Double]]></Throw>
+            </then>
+            <else>
+                <Puts><![CDATA[4 is not < 3 Double
+]]></Puts>
+            </else>
+        </If>
+
+        <If>
+            <condition>
+                <Less>
+                    <BigDecimal>3</BigDecimal>
+                    <BigDecimal>4</BigDecimal>
+                </Less>
+            </condition>
+            <then>
+                <Puts><![CDATA[3 is < 4 BigDecimal
+]]></Puts>
+            </then>
+        </If>
+        <If>
+            <condition>
+                <Less>
+                    <BigDecimal>4</BigDecimal>
+                    <BigDecimal>3</BigDecimal>
+                </Less>
+            </condition>
+            <then>
+                <Throw><![CDATA[Test Failed, 4 is < 3 BigDecimal]]></Throw>
+            </then>
+            <else>
+                <Puts><![CDATA[4 is not < 3 BigDecimal
+]]></Puts>
+            </else>
+        </If>
+    </Block>
+
+    <Block test="Greater">
+        <If>
+            <condition>
+                <Greater>
+                    <Integer>4</Integer>
+                    <Integer>3</Integer>
+                </Greater>
+            </condition>
+            <then>
+                <Puts><![CDATA[3 is < 4
+]]></Puts>
+            </then>
+        </If>
+        <If>
+            <condition>
+                <Greater>
+                    <Integer>3</Integer>
+                    <Integer>4</Integer>
+                </Greater>
+            </condition>
+            <then>
+                <Throw><![CDATA[Test Failed, 4 is < 3 Integer]]></Throw>
+            </then>
+            <else>
+                <Puts><![CDATA[4 is not < 3 Integer
+]]></Puts>
+            </else>
+        </If>
+
+        <If>
+            <condition>
+                <Greater>
+                    <Double>4</Double>
+                    <Double>3</Double>
+                </Greater>
+            </condition>
+            <then>
+                <Puts><![CDATA[3 is < 4 Double
+]]></Puts>
+            </then>
+        </If>
+        <If>
+            <condition>
+                <Greater>
+                    <Double>3</Double>
+                    <Double>4</Double>
+                </Greater>
+            </condition>
+            <then>
+                <Throw><![CDATA[Test Failed, 4 is < 3 Double]]></Throw>
+            </then>
+            <else>
+                <Puts><![CDATA[4 is not < 3 Double
+]]></Puts>
+            </else>
+        </If>
+
+        <If>
+            <condition>
+                <Greater>
+                    <BigDecimal>4</BigDecimal>
+                    <BigDecimal>3</BigDecimal>
+                </Greater>
+            </condition>
+            <then>
+                <Puts><![CDATA[3 is < 4 BigDecimal
+]]></Puts>
+            </then>
+        </If>
+        <If>
+            <condition>
+                <Greater>
+                    <BigDecimal>3</BigDecimal>
+                    <BigDecimal>4</BigDecimal>
+                </Greater>
+            </condition>
+            <then>
+                <Throw><![CDATA[Test Failed, 4 is < 3 BigDecimal]]></Throw>
+            </then>
+            <else>
+                <Puts><![CDATA[4 is not < 3 BigDecimal
+]]></Puts>
+            </else>
+        </If>
+    </Block>
+
+
+    <Block test="LessOrEqual">
+        <If>
+            <condition>
+                <LessOrEqual>
+                    <Integer>3</Integer>
+                    <Integer>3</Integer>
+                </LessOrEqual>
+            </condition>
+            <then>
+                <Puts><![CDATA[3 is <= 3
+]]></Puts>
+            </then>
+        </If>
+        <If>
+            <condition>
+                <LessOrEqual>
+                    <Integer>3</Integer>
+                    <Integer>4</Integer>
+                </LessOrEqual>
+            </condition>
+            <then>
+                <Puts><![CDATA[3 is <= 4
+]]></Puts>
+            </then>
+        </If>
+        <If>
+            <condition>
+                <LessOrEqual>
+                    <Integer>4</Integer>
+                    <Integer>3</Integer>
+                </LessOrEqual>
+            </condition>
+            <then>
+                <Throw><![CDATA[Test Failed, 4 is <= 3 Integer]]></Throw>
+            </then>
+            <else>
+                <Puts><![CDATA[4 is not <= 3 Integer
+]]></Puts>
+            </else>
+        </If>
+
+        <If>
+            <condition>
+                <LessOrEqual>
+                    <Double>3</Double>
+                    <Double>4</Double>
+                </LessOrEqual>
+            </condition>
+            <then>
+                <Puts><![CDATA[3 is <= 4 Double
+]]></Puts>
+            </then>
+        </If>
+        <If>
+            <condition>
+                <LessOrEqual>
+                    <Double>4</Double>
+                    <Double>3</Double>
+                </LessOrEqual>
+            </condition>
+            <then>
+                <Throw><![CDATA[Test Failed, 4 is <= 3 Double]]></Throw>
+            </then>
+            <else>
+                <Puts><![CDATA[4 is not <= 3 Double
+]]></Puts>
+            </else>
+        </If>
+
+        <If>
+            <condition>
+                <LessOrEqual>
+                    <BigDecimal>3</BigDecimal>
+                    <BigDecimal>4</BigDecimal>
+                </LessOrEqual>
+            </condition>
+            <then>
+                <Puts><![CDATA[3 is <= 4 BigDecimal
+]]></Puts>
+            </then>
+        </If>
+        <If>
+            <condition>
+                <LessOrEqual>
+                    <BigDecimal>4</BigDecimal>
+                    <BigDecimal>3</BigDecimal>
+                </LessOrEqual>
+            </condition>
+            <then>
+                <Throw><![CDATA[Test Failed, 4 is <= 3 BigDecimal]]></Throw>
+            </then>
+            <else>
+                <Puts><![CDATA[4 is not <= 3 BigDecimal
+]]></Puts>
+            </else>
+        </If>
+    </Block>
+
+    <Block test="GreaterOrEqual">
+        <If>
+            <condition>
+                <GreaterOrEqual>
+                    <Integer>3</Integer>
+                    <Integer>3</Integer>
+                </GreaterOrEqual>
+            </condition>
+            <then>
+                <Puts><![CDATA[3 is <= 4
+]]></Puts>
+            </then>
+        </If>
+        <If>
+            <condition>
+                <GreaterOrEqual>
+                    <Integer>4</Integer>
+                    <Integer>3</Integer>
+                </GreaterOrEqual>
+            </condition>
+            <then>
+                <Puts><![CDATA[3 is <= 4
+]]></Puts>
+            </then>
+        </If>
+        <If>
+            <condition>
+                <GreaterOrEqual>
+                    <Integer>3</Integer>
+                    <Integer>4</Integer>
+                </GreaterOrEqual>
+            </condition>
+            <then>
+                <Throw><![CDATA[Test Failed, 4 is <= 3 Integer]]></Throw>
+            </then>
+            <else>
+                <Puts><![CDATA[4 is not <= 3 Integer
+]]></Puts>
+            </else>
+        </If>
+
+        <If>
+            <condition>
+                <GreaterOrEqual>
+                    <Double>4</Double>
+                    <Double>3</Double>
+                </GreaterOrEqual>
+            </condition>
+            <then>
+                <Puts><![CDATA[3 is <= 4 Double
+]]></Puts>
+            </then>
+        </If>
+        <If>
+            <condition>
+                <GreaterOrEqual>
+                    <Double>3</Double>
+                    <Double>4</Double>
+                </GreaterOrEqual>
+            </condition>
+            <then>
+                <Throw><![CDATA[Test Failed, 4 is <= =3 Double]]></Throw>
+            </then>
+            <else>
+                <Puts><![CDATA[4 is not <= 3 Double
+]]></Puts>
+            </else>
+        </If>
+
+        <If>
+            <condition>
+                <GreaterOrEqual>
+                    <BigDecimal>4</BigDecimal>
+                    <BigDecimal>3</BigDecimal>
+                </GreaterOrEqual>
+            </condition>
+            <then>
+                <Puts><![CDATA[3 is <= 4 BigDecimal
+]]></Puts>
+            </then>
+        </If>
+        <If>
+            <condition>
+                <GreaterOrEqual>
+                    <BigDecimal>3</BigDecimal>
+                    <BigDecimal>4</BigDecimal>
+                </GreaterOrEqual>
+            </condition>
+            <then>
+                <Throw><![CDATA[Test Failed, 4 is <= 3 BigDecimal]]></Throw>
+            </then>
+            <else>
+                <Puts><![CDATA[4 is not < 3 BigDecimal
+]]></Puts>
+            </else>
+        </If>
+    </Block>
+
+</Script>

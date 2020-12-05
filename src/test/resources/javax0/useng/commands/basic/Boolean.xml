@@ -1,0 +1,38 @@
+<Script xmlns="useng:basic">
+    <Expected xmlns="test"><![CDATA[true values
+        true
+        true
+        true
+        true
+        true
+        true
+        true
+        true
+        from here false values
+        false
+        false
+        false
+        false
+        false
+        false
+        false]]></Expected>
+    <Puts trim="true">
+        true values
+        <Boolean>true</Boolean>
+        <Boolean><Boolean>true</Boolean></Boolean>
+        <Boolean>True</Boolean>
+        <Boolean>trUe</Boolean>
+        <Boolean><Integer>1</Integer></Boolean>
+        <Boolean><Long>1</Long></Boolean>
+        <Boolean><Double>1</Double></Boolean>
+        <Boolean><BigDecimal>1</BigDecimal></Boolean>
+        from here false values
+        <Boolean>Off</Boolean>
+        <Boolean>Fasle</Boolean>
+        <Boolean>False</Boolean>
+        <Boolean><Integer>0</Integer></Boolean>
+        <Boolean><Long>0</Long></Boolean>
+        <Boolean><Double>0.0</Double></Boolean>
+        <Boolean><BigDecimal>0000.0000</BigDecimal></Boolean>
+    </Puts>
+</Script>

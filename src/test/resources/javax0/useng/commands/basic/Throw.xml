@@ -1,0 +1,5 @@
+<Script xmlns="useng:basic" xmlns:t="test">
+    <t:Throws>
+        <Throw>wops</Throw>
+    </t:Throws>
+</Script>

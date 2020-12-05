@@ -25,7 +25,9 @@ public class Processor implements javax0.useng.api.Processor {
     }
 
     CommandResult<?> process(Node node) {
-        final var command = register.get(node.getNamespaceURI(), node.getLocalName()).orElseThrow(() -> new ExecutionException("Command {" + node.getNamespaceURI() + "}" + node.getLocalName() + " is not found"));
+        final var command = register.get(node.getNamespaceURI(), node.getLocalName())
+            .orElseThrow(() -> new SimpleCommandContext(this, node, globalContext, false)
+                .exception("Command {" + node.getNamespaceURI() + "}" + node.getLocalName() + " is not found"));
         final var ctx = new SimpleCommandContext(this, node, globalContext, command.argumentManager().needsTextSegments());
         return command.execute(ctx);
     }

@@ -21,7 +21,7 @@ public class While implements NamedCommand<Object> {
         for (; ; ) {
             CommandResult<Boolean> condition = ctx.process(conditionCode);
             if (condition.type() != Boolean.class) {
-                throw new ExecutionException("The condition of an While has to be boolean");
+                throw ctx.exception("The condition of an While has to be boolean");
             }
 
             if (condition.get()) {
