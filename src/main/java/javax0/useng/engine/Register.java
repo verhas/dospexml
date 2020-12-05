@@ -12,6 +12,7 @@ import javax0.useng.commands.basic.Compare;
 import javax0.useng.commands.basic.Concat;
 import javax0.useng.commands.basic.Get;
 import javax0.useng.commands.basic.If;
+import javax0.useng.commands.basic.Mult;
 import javax0.useng.commands.basic.Not;
 import javax0.useng.commands.basic.Null;
 import javax0.useng.commands.basic.Puts;
@@ -42,12 +43,13 @@ public class Register {
     public Register registerBasicCommands(final String nameSpace, final PrintStream output) {
         processor.commandRegister().register(nameSpace, new Script<>(), new Puts(output), new Variable(), new Let(),
             new Get(), new Concat(), new CommandDouble(), new CommandLong(), new CommandString(), new CommandBoolean(),
-            new CommandInteger(), new Null(), new Block(), new If(), new While(), new Compare.Equals(),
+            new CommandInteger(), new Null(), new Block(), new If(), new While(),
+            new Compare.Equals(),
             new Compare.Less(),
             new Compare.LessOrEqual(),
             new Compare.Greater(),
             new Compare.GreaterOrEqual(),
-            new Not(), new Add(), new CommandBigDecimal(), new Throw()
+            new Not(), new Add(), new Mult(), new CommandBigDecimal(), new Throw()
         );
         return this;
     }

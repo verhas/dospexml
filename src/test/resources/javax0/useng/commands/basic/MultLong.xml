@@ -1,0 +1,34 @@
+<Script xmlns="useng:basic">
+    <Expected xmlns="test">39916800</Expected>
+    <Let name="x">
+        <Long>2</Long>
+    </Let>
+    <Let name="prod">
+        <Long>1</Long>
+    </Let>
+    <While>
+        <condition>
+            <Less>
+                <Get name="x"/>
+                <Long>12</Long>
+            </Less>
+        </condition>
+        <Block>
+            <Let name="prod">
+                <Mult>
+                    <Get name="prod"/>
+                    <Get name="x"/>
+                </Mult>
+            </Let>
+            <Let name="x">
+                <Add>
+                    <Get name="x"/>
+                    <Long>1</Long>
+                </Add>
+            </Let>
+        </Block>
+    </While>
+    <Puts trim="true">
+        <Get name="prod"/>
+    </Puts>
+</Script>

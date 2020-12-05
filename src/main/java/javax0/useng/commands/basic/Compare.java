@@ -22,7 +22,10 @@ public class Compare {
                         return CommandResult.FALSE;
                     }
                 }
-                if (!a.equals(b)) {
+                if (a == null && b == null) {
+                    return CommandResult.TRUE;
+                }
+                if (a != null && !a.equals(b)) {
                     return CommandResult.FALSE;
                 }
             }
@@ -44,7 +47,7 @@ public class Compare {
             final var b = results.get(i + 1).get();
             if (a instanceof Number && b instanceof Number &&
                 !(a instanceof Double || b instanceof Double
-                || a instanceof BigDecimal || b instanceof BigDecimal)) {
+                    || a instanceof BigDecimal || b instanceof BigDecimal)) {
                 if (!numberPredicate.test(((Number) a).longValue(), ((Number) b).longValue())) {
                     return CommandResult.FALSE;
                 }

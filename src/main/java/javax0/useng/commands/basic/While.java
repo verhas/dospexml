@@ -10,12 +10,12 @@ import org.w3c.dom.Node;
 public class While implements NamedCommand<Object> {
 
     public CommandResult<Object> execute(CommandContext ctx) {
-        Node conditionNode = Xml.child(ctx.node(), ctx.nameSpace().orElse(null), "condition")
+        final Node conditionNode = Xml.child(ctx.node(), ctx.nameSpace().orElse(null), "condition")
             .orElseThrow(() -> new ExecutionException("While needs a condition"));
-        Node thenNode = Xml.child(ctx.node(), 1).orElse(null);
-
         final var conditionCode = Xml.child(conditionNode, 0)
             .orElseThrow(() -> new ExecutionException("Condition needs a boolean expression in if."));
+
+        final Node block = Xml.child(ctx.node(), 1).orElse(null);
 
         CommandResult<Object> result = CommandResult.simple(null, Object.class);
         for (; ; ) {
@@ -25,8 +25,8 @@ public class While implements NamedCommand<Object> {
             }
 
             if (condition.get()) {
-                if (thenNode != null) {
-                    result = ctx.process(thenNode);
+                if (block != null) {
+                    result = ctx.process(block);
                 } else {
                     break;
                 }
