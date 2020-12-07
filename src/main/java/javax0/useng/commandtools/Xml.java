@@ -43,12 +43,19 @@ public class Xml {
             return Optional.empty();
         }
         for (final var node : children(it)) {
-            if (node.getNodeType() != Node.TEXT_NODE &&
-                counter++ >= index) {
+            if (Xml.isCollectibleNonTextNode(node) && counter++ >= index) {
                 return Optional.of(node);
             }
         }
         return Optional.empty();
+    }
+
+    public static boolean isCollectibleNonTextNode(Node node) {
+        return node.getNodeType() != Node.TEXT_NODE &&
+            node.getNodeType() != Node.PROCESSING_INSTRUCTION_NODE &&
+            node.getNodeType() != Node.COMMENT_NODE &&
+            node.getNodeType() != Node.CDATA_SECTION_NODE &&
+            node.getNodeType() != Node.ATTRIBUTE_NODE;
     }
 
     public static Iterable<Node> children(final Node it) {

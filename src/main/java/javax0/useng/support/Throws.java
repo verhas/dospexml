@@ -16,6 +16,6 @@ public class Throws implements NamedCommand<Void> {
                 return CommandResult.VOID;
             }
         }
-        return CommandResult.VOID;
+        throw new AssertionError("Throws did not throw exception.");
     }
 }

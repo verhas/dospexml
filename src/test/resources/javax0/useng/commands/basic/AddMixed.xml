@@ -1,8 +1,7 @@
-<Script xmlns="useng:basic">
-    <Expected xmlns="test"><![CDATA[4.0
-3.0
-2]]></Expected>
-    <Puts trim="true" trail="\n">
+<Script xmlns="useng:basic" xmlns:t="test">
+    <t:DisplayName>'Add' can add two or more mixed type numbers together</t:DisplayName>
+    <t:Expected>4.0</t:Expected>
+    <Puts trim="true">
         <Add>
             <BigDecimal>1</BigDecimal>
             <Integer>1</Integer>
@@ -10,29 +9,31 @@
             <Double>1</Double>
         </Add>
     </Puts>
-    <Puts trim="true" trail="\n">
+    <t:Expected>3.0</t:Expected>
+    <Puts trim="true">
         <Add>
             <Integer>1</Integer>
             <Long>1</Long>
             <Double>1</Double>
         </Add>
     </Puts>
+    <t:Expected>2</t:Expected>
     <Puts trim="true">
         <Add>
             <Integer>1</Integer>
             <Long>1</Long>
         </Add>
     </Puts>
-    <Throws xmlns="test">
-        <Add xmlns="useng:basic">
+    <t:Throws>
+        <Add>
             <String>1</String>
             <Long>1</Long>
         </Add>
-    </Throws>
-    <Throws xmlns="test">
-        <Add xmlns="useng:basic">
+    </t:Throws>
+    <t:Throws>
+        <Add>
             <String>1</String>
             <Long>1</Long>
         </Add>
-    </Throws>
+    </t:Throws>
 </Script>

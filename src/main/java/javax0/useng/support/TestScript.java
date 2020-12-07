@@ -1,15 +1,11 @@
 package javax0.useng.support;
 
-import javax0.useng.api.CommandContext;
-import javax0.useng.api.ExecutionException;
 import javax0.useng.api.NamedCommand;
 import javax0.useng.engine.Processor;
 import javax0.useng.engine.Register;
 import javax0.useng.input.Input;
 import javax0.useng.input.XmlInput;
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -38,16 +34,7 @@ public class TestScript {
         return new TestScript(uri, commands);
     }
 
-    private static class TestContext implements CommandContext.GlobalContext {
-        private final StringBuilder sb = new StringBuilder();
-
-        @Override
-        public Object get() {
-            return sb;
-        }
-    }
-
-    public void execute(Object test, TriConsumer report) throws ParserConfigurationException, SAXException, IOException {
+    public void execute(Object test) throws ParserConfigurationException, SAXException, IOException {
         for (final var file : Objects.requireNonNull(new File(test.getClass().getResource(".").getPath())
             .listFiles((dir, name) -> name.endsWith(".xml")))) {
             final String[] result;
@@ -57,60 +44,23 @@ public class TestScript {
                 enrichException(file, e);
                 throw e;
             }
-            report.apply(result[0], result[1], file.getName());
+            final var expected = result[0];
+            final var actual = result[1];
+            if (expected == null && actual == null) {
+                return;
+            }
+            if (expected == null || !expected.equals(actual)) {
+                throw new AssertionError("expected: " + expected + " but was: " + actual);
+            }
         }
     }
 
     private static void enrichException(File file, Exception e) {
         final var trace = e.getStackTrace();
-        final String methodName = calculateMethodName(e);
-        trace[0] = new StackTraceElement(file.getName(), methodName, file.getAbsolutePath(), 1);
+        trace[0] = new StackTraceElement(file.getName(), trace[0].getMethodName(), trace[0].getFileName(), trace[0].getLineNumber());
         e.setStackTrace(trace);
     }
 
-    private static String calculateMethodName(Exception e) {
-        final String methodName;
-        CommandContext ctx;
-        if (e instanceof ExecutionException && (ctx = ((ExecutionException) e).ctx) != null) {
-            final var sb = new StringBuilder();
-            Node lastNode = null;
-            for (var node = ctx.node(); node != null; node = node.getParentNode()) {
-                var index = countNodePosition(node, lastNode);
-                if (node.getLocalName() != null) {
-                    sb.insert(0, node.getLocalName() + index);
-                }
-                lastNode = node;
-            }
-            methodName = "//" + sb.toString();
-        } else {
-            methodName = "";
-        }
-        return methodName;
-    }
-
-    private static String countNodePosition(Node node, Node lastNode) {
-        int index = -1;
-        if (lastNode != null) {
-            NodeList children = node.getChildNodes();
-            int n = children.getLength();
-            int count = 0;
-            for (int i = 0; i < n; i++) {
-                final var child = children.item(i);
-                if (child == lastNode) {
-                    index = count;
-                    if (index == 0) {
-                        return "/";
-                    } else {
-                        return "[" + index + "]/";
-                    }
-                }
-                if (child.getNodeType() == Node.ELEMENT_NODE) {
-                    count++;
-                }
-            }
-        }
-        return "";
-    }
 
     public String[] execute(File file) throws IOException, SAXException, ParserConfigurationException {
         final ByteArrayOutputStream baos;
@@ -121,16 +71,17 @@ public class TestScript {
     public String[] execute(String input) throws IOException, SAXException, ParserConfigurationException {
         Input in = new XmlInput(input);
         final Document doc = in.getDocument();
-        final var expected = new TestContext();
+        final var context = new TestContext();
         try (final var output = new ByteArrayOutputStream()) {
             try (final var print = new PrintStream(output)) {
-                try (final var processor = new Processor(expected)) {
+                try (final var processor = new Processor(context)) {
                     Register.withProcessor(processor).registerBasicCommands("useng:basic", print);
-                    processor.commandRegister().register("test", new Expected(), new Throws());
+                    processor.commandRegister().register("test", new Expected(), new Throws(), new DisplayName());
+                    processor.commandRegister().register("documentation", new Documentation());
                     processor.process(doc);
                 }
             }
-            return new String[]{expected.get().toString(), output.toString()};
+            return new String[]{context.get().expected.toString(), output.toString()};
         }
     }
 

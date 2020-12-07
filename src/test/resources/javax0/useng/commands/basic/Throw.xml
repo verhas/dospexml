@@ -1,3 +1,9 @@
+<!--
+
+The command `Throw` throws an exception during the execution.
+The command must not have any body.
+
+-->
 <Script xmlns="useng:basic" xmlns:t="test">
     <t:Throws>
         <Throw>wops</Throw>

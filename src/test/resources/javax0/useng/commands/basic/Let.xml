@@ -7,6 +7,9 @@
     <Variable name="var"/>
     <!-- we set the value of this variable to 53 -->
     <Let name="var">
+        <!--
+        comment
+        -->
         <Long>53</Long>
     </Let>
     <!-- we print the value of the variable here -->

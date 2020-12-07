@@ -5,6 +5,7 @@ import javax0.useng.api.CommandResult;
 import javax0.useng.api.ExecutionException;
 import javax0.useng.api.Processor;
 import javax0.useng.api.Query;
+import javax0.useng.commandtools.Xml;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
@@ -30,7 +31,7 @@ public class SimpleCommandContext implements CommandContext {
         final var childNodes = node.getChildNodes();
         final var numberOfNodes = childNodes.getLength();
         for (int i = 0; i < numberOfNodes; i++) {
-            if (collectibleNonTextNode(childNodes.item(i)) || needsAllChildrenNodes) {
+            if (Xml.isCollectibleNonTextNode(childNodes.item(i)) || needsAllChildrenNodes) {
                 this.nodeList.add(childNodes.item(i));
             }
         }
@@ -39,14 +40,6 @@ public class SimpleCommandContext implements CommandContext {
         this.attributes = node.getAttributes();
         this.node = node;
         this.globalContext = globalContext;
-    }
-
-    private static boolean collectibleNonTextNode(Node node) {
-        return node.getNodeType() != Node.TEXT_NODE &&
-            node.getNodeType() != Node.PROCESSING_INSTRUCTION_NODE &&
-            node.getNodeType() != Node.COMMENT_NODE &&
-            node.getNodeType() != Node.CDATA_SECTION_NODE &&
-            node.getNodeType() != Node.ATTRIBUTE_NODE;
     }
 
     @Override
