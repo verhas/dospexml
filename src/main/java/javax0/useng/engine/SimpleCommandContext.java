@@ -31,7 +31,7 @@ public class SimpleCommandContext implements CommandContext {
         final var childNodes = node.getChildNodes();
         final var numberOfNodes = childNodes.getLength();
         for (int i = 0; i < numberOfNodes; i++) {
-            if (Xml.isCollectibleNonTextNode(childNodes.item(i)) || needsAllChildrenNodes) {
+            if (Xml.isNonTextNode(childNodes.item(i)) || needsAllChildrenNodes) {
                 this.nodeList.add(childNodes.item(i));
             }
         }

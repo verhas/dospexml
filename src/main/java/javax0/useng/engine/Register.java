@@ -2,6 +2,7 @@ package javax0.useng.engine;
 
 import javax0.useng.commands.basic.Add;
 import javax0.useng.commands.basic.Block;
+import javax0.useng.commands.basic.Call;
 import javax0.useng.commands.basic.CommandBigDecimal;
 import javax0.useng.commands.basic.CommandBoolean;
 import javax0.useng.commands.basic.CommandDouble;
@@ -18,6 +19,7 @@ import javax0.useng.commands.basic.Null;
 import javax0.useng.commands.basic.Puts;
 import javax0.useng.commands.basic.Script;
 import javax0.useng.commands.basic.Let;
+import javax0.useng.commands.basic.Sub;
 import javax0.useng.commands.basic.Throw;
 import javax0.useng.commands.basic.Variable;
 import javax0.useng.commands.basic.While;
@@ -49,7 +51,8 @@ public class Register {
             new Compare.LessOrEqual(),
             new Compare.Greater(),
             new Compare.GreaterOrEqual(),
-            new Not(), new Add(), new Mult(), new CommandBigDecimal(), new Throw()
+            new Not(), new Add(), new Mult(), new CommandBigDecimal(), new Throw(),
+            new Sub(), new Call()
         );
         return this;
     }

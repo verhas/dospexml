@@ -43,14 +43,14 @@ public class Xml {
             return Optional.empty();
         }
         for (final var node : children(it)) {
-            if (Xml.isCollectibleNonTextNode(node) && counter++ >= index) {
+            if (Xml.isNonTextNode(node) && counter++ >= index) {
                 return Optional.of(node);
             }
         }
         return Optional.empty();
     }
 
-    public static boolean isCollectibleNonTextNode(Node node) {
+    public static boolean isNonTextNode(Node node) {
         return node.getNodeType() != Node.TEXT_NODE &&
             node.getNodeType() != Node.PROCESSING_INSTRUCTION_NODE &&
             node.getNodeType() != Node.COMMENT_NODE &&

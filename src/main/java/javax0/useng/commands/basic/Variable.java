@@ -24,5 +24,10 @@ public class Variable implements NamedCommand<Variable.VariableHolder> {
 
     public static class VariableHolder {
         Object value;
+
+        @Override
+        public String toString() {
+            return value == null ? "null:null" : value.getClass().getName() + ":" + value.toString();
+        }
     }
 }

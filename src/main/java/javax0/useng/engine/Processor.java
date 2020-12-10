@@ -13,6 +13,7 @@ import java.util.Map;
 
 public class Processor implements javax0.useng.api.Processor {
 
+    int dynamicLevel = 0;
     final CommandRegister register;
     final CommandContext.GlobalContext<?> globalContext;
     final private Map<Object, StaticQueryMap<?, ?>> staticMap = new HashMap<>();
@@ -45,6 +46,7 @@ public class Processor implements javax0.useng.api.Processor {
 
     @Override
     public javax0.useng.api.Processor open() {
+        dynamicLevel++;
         commandRegister().open();
         dynamicMap.values().forEach(DynamicQueryMap::open);
         return this;
@@ -52,6 +54,7 @@ public class Processor implements javax0.useng.api.Processor {
 
     @Override
     public void close() {
+        dynamicLevel--;
         commandRegister().close();
         dynamicMap.values().forEach(DynamicQueryMap::close);
     }
@@ -68,7 +71,7 @@ public class Processor implements javax0.useng.api.Processor {
     <K, V> Query<K, V> dynamicQuery(Object key) {
         DynamicQueryMap<?, ?> map;
         if ((map = dynamicMap.get(key)) == null) {
-            map = new DynamicQueryMap<>();
+            map = new DynamicQueryMap<>(dynamicLevel);
             dynamicMap.put(key, map);
         }
         return (DynamicQueryMap<K, V>) map;

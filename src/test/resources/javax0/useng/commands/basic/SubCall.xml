@@ -1,0 +1,57 @@
+<Script xmlns="useng:basic" xmlns:t="test">
+    <t:Expected><![CDATA[Before calling
+Argument preparation calling
+I am in the subroutine, argument is
+            55
+I am in the subroutine, argument altered is
+                63
+I am in the subroutine, argument is still
+            55
+I am in the subroutine, argiment is
+            64
+After calling
+        null
+        is null
+After calling
+        null
+        is null
+]]></t:Expected>
+    <Sub name="subroutine1"/>
+    <Sub name="subroutine">
+        <Puts trim="true" trail="\n">I am in the subroutine, argument is
+            <Get name="argument" locality="dynamic"/>
+        </Puts>
+        <Call name="subroutine1">
+            <Let name="argument" locality="dynamic" declare="true">
+                <String>63</String>
+            </Let>
+            <Puts trim="true" trail="\n">I am in the subroutine, argument altered is
+                <Get name="argument" locality="dynamic"/>
+            </Puts>
+        </Call>
+        <Puts trim="true" trail="\n">I am in the subroutine, argument is still
+            <Get name="argument" locality="dynamic"/>
+        </Puts>
+        <Let name="argiment" locality="dynamic" declare="true">
+            <String>64</String>
+        </Let>
+        <Puts trim="true" trail="\n">I am in the subroutine, argiment is
+            <Get name="argiment" locality="dynamic"/>
+        </Puts>
+    </Sub>
+    <Puts trim="true" trail="\n">Before calling</Puts>
+    <Call name="subroutine">
+        <Let locality="dynamic" name="argument">
+            <String>55</String>
+        </Let>
+        <Puts trim="true" trail="\n">Argument preparation calling</Puts>
+    </Call>
+    <Puts trim="true" trail="\n">After calling
+        <Get name="argument" locality="dynamic"/>
+        is null
+    </Puts>
+    <Puts trim="true" trail="\n">After calling
+        <Get name="argiment" locality="dynamic"/>
+        is null
+    </Puts>
+</Script>

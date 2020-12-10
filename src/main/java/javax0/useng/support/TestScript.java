@@ -77,7 +77,6 @@ public class TestScript {
                 try (final var processor = new Processor(context)) {
                     Register.withProcessor(processor).registerBasicCommands("useng:basic", print);
                     processor.commandRegister().register("test", new Expected(), new Throws(), new DisplayName());
-                    processor.commandRegister().register("documentation", new Documentation());
                     processor.process(doc);
                 }
             }

@@ -1,5 +1,6 @@
 package javax0.useng.engine;
 
+import javax0.useng.api.ExecutionException;
 import javax0.useng.api.Query;
 
 import java.util.HashMap;
@@ -8,9 +9,24 @@ import java.util.Map;
 import java.util.Set;
 
 public class DynamicQueryMap<K, V> implements AutoCloseable, Query<K, V> {
-
+public static DynamicQueryMap debugThis = null;
     private MapHolder<K, V> head = null;
     private final Map<K, V> globalMap = new HashMap<>();
+
+    /**
+     * Create a new {@link DynamicQueryMap} on the current level. The {@link DynamicQueryMap}s have the same level even
+     * if they are created when the code is already some level deep. In that case the structure wil be created when the
+     * map is first needed. This is eventually may be much later than when the level was opened.
+     *
+     * @param level
+     */
+    DynamicQueryMap(int level) {
+        while (level > 0) {
+            open();
+            level--;
+        }
+        debugThis = this;
+    }
 
     @Override
     public boolean containsKey(K key) {
@@ -78,10 +94,9 @@ public class DynamicQueryMap<K, V> implements AutoCloseable, Query<K, V> {
     }
 
     public void close() {
-        /* Closing on the top level is not an issue, because it may happen that a dynamic map is created in a lower level,
-        used only in the lover level, but the traversal will find it later in higher level as well.
-         */
-        if (head != null) {
+        if (head == null) {
+            throw new ExecutionException("There are too many "+DynamicQueryMap.class.getName()+" closes");
+        } else {
             head = head.parent;
         }
     }
@@ -92,6 +107,32 @@ public class DynamicQueryMap<K, V> implements AutoCloseable, Query<K, V> {
 
         private MapHolder(MapHolder parent) {
             this.parent = parent;
+        }
+
+        private int level() {
+            if (parent == null) {
+                return 1;
+            }
+            return parent.level() + 1;
+        }
+
+        @Override
+        public String toString() {
+            final var sb = new StringBuilder();
+            if (parent != null) {
+                sb.append(parent.toString());
+            }
+            sb.append(level()).append(": {");
+            for (final var entry : map.entrySet()) {
+                sb.append("\"");
+                sb.append(entry.getKey());
+                sb.append("\"");
+                sb.append(" = \"");
+                sb.append(entry.getValue());
+                sb.append("\"");
+            }
+            sb.append("}");
+            return sb.toString();
         }
     }
 }
