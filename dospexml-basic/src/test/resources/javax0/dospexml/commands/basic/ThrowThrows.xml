@@ -1,0 +1,3 @@
+<Script xmlns="dospex:basic">
+    <Throws xmlns="test"><Throw xmlns="dospex:basic">Message</Throw></Throws>
+</Script>

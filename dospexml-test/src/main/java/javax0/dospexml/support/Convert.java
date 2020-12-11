@@ -1,7 +1,7 @@
 package javax0.dospexml.support;
 
-import dospexml.api.CommandResult;
-import dospexml.api.ExecutionException;
+import javax0.dospexml.api.CommandResult;
+import javax0.dospexml.api.ExecutionException;
 
 import java.io.IOException;
 import java.io.StreamTokenizer;

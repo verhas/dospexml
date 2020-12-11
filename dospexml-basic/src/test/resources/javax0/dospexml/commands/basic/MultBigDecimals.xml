@@ -1,0 +1,34 @@
+<Script xmlns="dospex:basic">
+    <Expected xmlns="test">608281864034267560872252163321295376887552831379210240000000000</Expected>
+    <Let name="x">
+        <BigDecimal>2</BigDecimal>
+    </Let>
+    <Let name="prod">
+        <BigDecimal>1</BigDecimal>
+    </Let>
+    <While>
+        <condition>
+            <Less>
+                <Get name="x"/>
+                <BigDecimal>50</BigDecimal>
+            </Less>
+        </condition>
+        <Block>
+            <Let name="prod">
+                <Mult>
+                    <Get name="prod"/>
+                    <Get name="x"/>
+                </Mult>
+            </Let>
+            <Let name="x">
+                <Add>
+                    <Get name="x"/>
+                    <BigDecimal>1</BigDecimal>
+                </Add>
+            </Let>
+        </Block>
+    </While>
+    <Puts trim="true">
+        <Get name="prod"/>
+    </Puts>
+</Script>

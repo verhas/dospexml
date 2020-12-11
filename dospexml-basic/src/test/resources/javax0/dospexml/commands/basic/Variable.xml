@@ -1,0 +1,33 @@
+<Script xmlns="dospex:basic" xmlns:t="test">
+    <t:Expected xmlns="test"><![CDATA[53
+54
+53
+]]></t:Expected>
+    <!-- this is a variable visible in the whole file -->
+    <Variable name="var"/>
+    <!-- we set the value of this variable to 53 -->
+    <Let name="var">
+        <Long>53</Long>
+    </Let>
+    <!-- we print the value of the variable here -->
+    <Puts trim="true" trail="\n">
+        <Get name="var"/>
+    </Puts>
+
+    <Block>
+        <!-- this variable is a local version and hides the top level var -->
+        <Variable name="var" declare="true"/>
+        <!-- we set the value of this variable to 53 -->
+        <Let name="var">
+            <Long>54</Long>
+        </Let>
+        <!-- we print the value of the variable here -->
+        <Puts trim="true" trail="\n">
+            <Get name="var"/>
+        </Puts>
+    </Block>
+    <!-- here we print 53 again as the var version inside the block went out of scope -->
+    <Puts trim="true" trail="\n">
+        <Get name="var"/>
+    </Puts>
+</Script>

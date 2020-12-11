@@ -1,0 +1,9 @@
+<Script xmlns="dospex:basic">
+    <Expected xmlns="test">2</Expected>
+    <Puts trim="true">
+        <Add>
+            <Integer>1</Integer>
+            <Integer>1</Integer>
+        </Add>
+    </Puts>
+</Script>

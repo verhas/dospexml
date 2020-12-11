@@ -1,9 +1,9 @@
 package javax0.dospexml.support;
 
-import dospexml.api.AllNodesProcessing;
-import dospexml.api.CommandContext;
-import dospexml.api.CommandResult;
-import dospexml.api.NamedCommand;
+import javax0.dospexml.api.AllNodesProcessing;
+import javax0.dospexml.api.CommandContext;
+import javax0.dospexml.api.CommandResult;
+import javax0.dospexml.api.NamedCommand;
 import org.w3c.dom.Node;
 
 class Expected implements NamedCommand<Void>, AllNodesProcessing {

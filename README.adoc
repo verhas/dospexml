@@ -1,16 +1,16 @@
-= Universal Scripting Engine
+= Domain Specific xmLanguage
 
 If you want to implement scripting into your application you have to choose a scripting engine, or you can create your own solution.
-Creating your own solution needs some syntax analysis, building an abstract syntax tree (AST) and then an engine that executes the AST.
+Creating your own solution needs lexical analysis, syntax analysis, building an abstract syntax tree (AST) and then an engine that executes the AST.
 
-This Universal Script Engine (USENG) is an engine that implements the second part of the scripting.
-To make it as universal as possible the AST used is XML Document structure.
+This Domain Specific xmLanguage (DOSPEX) is an engine that implements the second part of the scripting.
+To make it as universal as possible the AST used is the XML Document structure.
 It also means that you can use and XML parser as a simple front-end, which may be good for some specific cases.
-Useng is not meant to be scripted in XML, except for experimenting and for testing.
+Dospex is not meant to be scripted in XML, except for experimenting and for testing.
 If you need XML scripting with a rich set of commands you may have a look at Apache Jelly.
 
-Useng is mainly to embed into an application.
-Useng has a limited set of commands that the embedding application may opt to use or totally ignore.
+Dospex is mainly to embed into an application.
+It has a limited set of commands that the embedding application may opt to use or totally ignore.
 Embedding application can easily define their own commands.
 A typical application uses a subset of the provided commands that provide basic programming constructs, like
 
@@ -40,8 +40,10 @@ The following code shows these steps.
 ----
 final org.w3c.dom.Document doc = ... get the document from some source ...
 try (final var processor = new Processor(null)) {
-    Register.withProcessor(processor).registerBasicCommands("useng:basic");
+    Register.with(processor).registerBasicCommands("dospex:basic");
     processor.commandRegister().register("myApp:namespace", new MyCommand());
     processor.process(doc);
 }
 ----
+
+

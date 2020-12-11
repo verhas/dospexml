@@ -1,0 +1,15 @@
+<Script xmlns="dospex:basic">
+    <Expected xmlns="test"><![CDATA[The big brown box
+            jumped over
+            1
+            lazy oven
+]]></Expected>
+    <Puts trim="true" trail="\n">
+        <Concat>
+            <String>The big brown box</String>
+            jumped over
+            <Long>1</Long>
+            lazy oven
+        </Concat>
+    </Puts>
+</Script>

@@ -1,0 +1,10 @@
+<Script xmlns="dospex:basic" xmlns:t="test">
+    <t:Expected>2.0</t:Expected>
+    <t:DisplayName>'Add' can add two double numbers together</t:DisplayName>
+    <Puts trim="true">
+        <Add>
+            <Double>1</Double>
+            <Double>1</Double>
+        </Add>
+    </Puts>
+</Script>

@@ -1,0 +1,10 @@
+<Script xmlns="dospex:basic" xmlns:t="test">
+    <t:Expected>2</t:Expected>
+    <t:DisplayName>'Add' can add two big decimal numbers together</t:DisplayName>
+    <Puts trim="true">
+        <Add>
+            <BigDecimal>1</BigDecimal>
+            <BigDecimal>1</BigDecimal>
+        </Add>
+    </Puts>
+</Script>

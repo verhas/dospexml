@@ -1,9 +1,9 @@
 package javax0.dospexml.support;
 
-import dospexml.api.CommandContext;
-import dospexml.api.CommandResult;
-import dospexml.api.ExecutionException;
-import dospexml.api.NamedCommand;
+import javax0.dospexml.api.CommandContext;
+import javax0.dospexml.api.CommandResult;
+import javax0.dospexml.api.ExecutionException;
+import javax0.dospexml.api.NamedCommand;
 
 public class Throws implements NamedCommand<Void> {
 
