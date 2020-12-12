@@ -55,8 +55,8 @@ public class Compare {
                 if (!(a instanceof Comparable && b instanceof Comparable)) {
                     throw new ExecutionException(commandName + " can compare only on numeric and comparable objects");
                 }
-                final var ac = (Comparable) a;
-                final var bc = (Comparable) b;
+                final Comparable ac = (Comparable) a;
+                final Comparable bc = (Comparable) b;
                 if (!comparablePredicate.test(ac.compareTo(bc))) {
                     return CommandResult.FALSE;
                 }

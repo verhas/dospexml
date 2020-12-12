@@ -61,7 +61,7 @@ public class CommandsBuilder implements CommandPackageBuilder {
             new Not(),
             new Null(),
             new Puts(output),
-            new Script(),
+            new Script<>(),
             new Let(),
             new Sub(),
             new Throw(),

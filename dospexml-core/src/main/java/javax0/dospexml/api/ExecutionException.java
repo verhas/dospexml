@@ -59,7 +59,7 @@ public class ExecutionException extends RuntimeException {
     }
 
     private static String countNodePosition(Node node, Node lastNode) {
-        int index = -1;
+        int index;
         if (lastNode != null) {
             NodeList children = node.getChildNodes();
             int n = children.getLength();

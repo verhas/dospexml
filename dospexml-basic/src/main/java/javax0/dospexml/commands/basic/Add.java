@@ -52,20 +52,20 @@ public class Add implements Command<Number> {
     }
 
     private static <T extends Number> CommandResult<T> addBigDecimals(List<CommandResult<?>> results) {
-        return (CommandResult<T>) addAll(results, BigDecimal.ZERO, Convert::toBigDecimal, (a, d) -> a.add(d));
+        return (CommandResult<T>) addAll(results, BigDecimal.ZERO, Convert::toBigDecimal, BigDecimal::add);
     }
 
 
     private static <T extends Number> CommandResult<T> addDoubles(List<CommandResult<?>> results) {
-        return (CommandResult<T>) addAll(results, 0.0, Convert::toDouble, (a, d) -> a + d);
+        return (CommandResult<T>) addAll(results, 0.0, Convert::toDouble, Double::sum);
     }
 
     private static <T extends Number> CommandResult<T> addLongs(List<CommandResult<?>> results) {
-        return (CommandResult<T>) addAll(results, 0L, Convert::toLong, (a, d) -> a + d);
+        return (CommandResult<T>) addAll(results, 0L, Convert::toLong, Long::sum);
     }
 
     private static <T extends Number> CommandResult<T> addInts(List<CommandResult<?>> results) {
-        return (CommandResult<T>) addAll(results, 0, Convert::toInt, (a, d) -> a + d);
+        return (CommandResult<T>) addAll(results, 0, Convert::toInt, Integer::sum);
     }
 
 }

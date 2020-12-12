@@ -20,11 +20,11 @@ public class SimpleCommandContext implements CommandContext {
     private final String nsuri;
     private final String localName;
     private final NamedNodeMap attributes;
-    private final GlobalContext globalContext;
+    private final GlobalContext<?> globalContext;
 
     public SimpleCommandContext(javax0.dospexml.engine.Processor processor,
                                 Node node,
-                                GlobalContext globalContext,
+                                GlobalContext<?> globalContext,
                                 boolean needsAllChildrenNodes) {
         this.processor = processor;
         this.nodeList = new ArrayList<>();
@@ -48,7 +48,7 @@ public class SimpleCommandContext implements CommandContext {
     }
 
     @Override
-    public GlobalContext globalContext() {
+    public GlobalContext<?> globalContext() {
         return globalContext;
     }
 
@@ -80,7 +80,7 @@ public class SimpleCommandContext implements CommandContext {
     @Override
     public Optional<String> attribute(String ns, String attr) {
         final var attrNode = attributes.getNamedItemNS(ns, attr);
-        return Optional.ofNullable(attrNode).map(n -> n.getTextContent());
+        return Optional.ofNullable(attrNode).map(Node::getTextContent);
     }
 
     @Override

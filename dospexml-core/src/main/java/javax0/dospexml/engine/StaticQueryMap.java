@@ -86,7 +86,7 @@ public class StaticQueryMap<K, V> {
 
 
         @Override
-        public V remove(Object key) {
+        public V remove(K key) {
             return local.remove(key);
         }
 

@@ -15,6 +15,6 @@ public class Null implements Command<Object> {
         } catch (ClassNotFoundException e) {
             throw ctx.exception("Type name " + type + " is not a valid class name");
         }
-        return CommandResult.simple(null, klass);
+        return CommandResult.simple(null, (Class<Object>)klass);
     }
 }

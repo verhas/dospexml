@@ -59,23 +59,18 @@ public class Xml {
     }
 
     public static Iterable<Node> children(final Node it) {
-        return new Iterable<Node>() {
+        return () -> new Iterator<>() {
+            int i = 0;
+            final NodeList nodes = it.getChildNodes();
+
             @Override
-            public Iterator<Node> iterator() {
-                return new Iterator<Node>() {
-                    int i = 0;
-                    final NodeList nodes = it.getChildNodes();
+            public boolean hasNext() {
+                return i < nodes.getLength();
+            }
 
-                    @Override
-                    public boolean hasNext() {
-                        return i < nodes.getLength();
-                    }
-
-                    @Override
-                    public Node next() {
-                        return nodes.item(i++);
-                    }
-                };
+            @Override
+            public Node next() {
+                return nodes.item(i++);
             }
         };
     }

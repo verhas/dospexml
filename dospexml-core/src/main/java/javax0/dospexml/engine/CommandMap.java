@@ -19,7 +19,7 @@ public class CommandMap {
 
     public void put(String nsuri, String tag, Command<?> command) {
         if (map.computeIfAbsent(nsuri, uri -> new HashMap<>()).put(tag, command) != null) {
-            throw new ExecutionException("{" + nsuri.toString() + "}" + tag + " command is already defined");
+            throw new ExecutionException("{" + nsuri + "}" + tag + " command is already defined");
         }
     }
 

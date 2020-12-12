@@ -53,7 +53,7 @@ public class Mult implements Command<Number> {
     }
 
     private static <T extends Number> CommandResult<T> multBigDecimals(List<CommandResult<?>> results) {
-        return (CommandResult<T>) addAll(results, BigDecimal.ONE, Convert::toBigDecimal, (a, d) -> a.multiply(d));
+        return (CommandResult<T>) addAll(results, BigDecimal.ONE, Convert::toBigDecimal, BigDecimal::multiply);
     }
 
 

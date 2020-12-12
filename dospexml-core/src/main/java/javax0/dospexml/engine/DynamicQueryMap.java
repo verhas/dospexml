@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.Set;
 
 public class DynamicQueryMap<K, V> implements AutoCloseable, Query<K, V> {
-    public static DynamicQueryMap debugThis = null;
     private MapHolder<K, V> head = null;
     private final Map<K, V> globalMap = new HashMap<>();
 
@@ -18,14 +17,13 @@ public class DynamicQueryMap<K, V> implements AutoCloseable, Query<K, V> {
      * if they are created when the code is already some level deep. In that case the structure wil be created when the
      * map is first needed. This is eventually may be much later than when the level was opened.
      *
-     * @param level
+     * @param level where the map should start creting the missing levels post fact
      */
     DynamicQueryMap(int level) {
         while (level > 0) {
             open();
             level--;
         }
-        debugThis = this;
     }
 
     @Override
@@ -74,7 +72,7 @@ public class DynamicQueryMap<K, V> implements AutoCloseable, Query<K, V> {
     }
 
     @Override
-    public V remove(Object key) {
+    public V remove(K key) {
         return head.map.remove(key);
     }
 
@@ -88,7 +86,7 @@ public class DynamicQueryMap<K, V> implements AutoCloseable, Query<K, V> {
         return keys;
     }
 
-    DynamicQueryMap open() {
+    DynamicQueryMap<K,V> open() {
         head = new MapHolder<>(head);
         return this;
     }
@@ -105,7 +103,7 @@ public class DynamicQueryMap<K, V> implements AutoCloseable, Query<K, V> {
         private final Map<K, V> map = new HashMap<>();
         private final MapHolder<K, V> parent;
 
-        private MapHolder(MapHolder parent) {
+        private MapHolder(MapHolder<K,V> parent) {
             this.parent = parent;
         }
 

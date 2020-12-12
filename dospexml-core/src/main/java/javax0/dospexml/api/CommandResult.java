@@ -48,22 +48,22 @@ public interface CommandResult<T> {
     CommandResult<java.lang.Void> VOID = new Void();
     CommandResult<Boolean> TRUE = simple(true);
     CommandResult<Boolean> FALSE = simple(false);
-    CommandResult<Boolean> ZERO = simple(0);
-    CommandResult<Boolean> ONE = simple(1);
-    CommandResult<Boolean> NULL = simple(null);
+    CommandResult<Integer> ZERO = simple(0);
+    CommandResult<Integer> ONE = simple(1);
+    CommandResult<?> NULL = simple(null);
 
-    static <T> CommandResult simple(T t) {
-        return new SimpleCommandResult(t);
+    static <T> CommandResult<T> simple(T t) {
+        return new <T>SimpleCommandResult<T>(t);
     }
 
-    static <T> CommandResult simple(T t, Class<T> k) {
-        return new SimpleCommandResult(t, k);
+    static <T> CommandResult<T> simple(T t, Class<T> k) {
+        return new <T>SimpleCommandResult<T>(t, k);
     }
 
     /**
      * Get the result.
      *
-     * @return
+     * @return the result
      */
     T get();
 
@@ -75,7 +75,7 @@ public interface CommandResult<T> {
     /**
      * If the command execution did not result any value
      *
-     * @return
+     * @return true if the result is void.
      */
     boolean isVoid();
 }

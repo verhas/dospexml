@@ -72,7 +72,7 @@ final var p = new Processor(null);
 
 // register commands
 new CommandsBuilder().with(p).nameSpace("dospex:basic").register();
-        
+
 // execute the script
 p.process(doc);
 ```

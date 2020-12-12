@@ -32,7 +32,7 @@ public class Throw implements Command<Void>, AllNodesProcessing {
         throw (E) t;
     }
 
-    private Throwable newInstance(CommandContext ctx, Class klass, String message) {
+    private Throwable newInstance(CommandContext ctx, Class<?> klass, String message) {
         try {
             return (Throwable) klass.getDeclaredConstructor(Object.class).newInstance(message);
         } catch (Exception e) {
@@ -44,7 +44,7 @@ public class Throw implements Command<Void>, AllNodesProcessing {
         }
     }
 
-    private static Class forName(final String klassName) {
+    private static Class<?> forName(final String klassName) {
         try {
             return Class.forName(klassName);
         } catch (ClassNotFoundException e) {

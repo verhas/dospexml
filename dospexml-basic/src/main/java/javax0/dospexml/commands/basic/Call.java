@@ -20,7 +20,7 @@ public class Call implements Command<Object> {
             final var query = ctx.<String, Node>staticQuery("subroutines");
             Node subroutine = query.get(name);
             if (subroutine == null) {
-                ctx.exception("Subroutine " + name + " is not defined");
+                throw ctx.exception("Subroutine " + name + " is not defined");
             }
             for (final var node : Xml.children(subroutine)) {
                 if (Xml.isNonTextNode(node)) {
