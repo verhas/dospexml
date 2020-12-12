@@ -22,6 +22,7 @@ public class CommandsBuilder implements CommandPackageBuilder {
     }
 
     private PrintStream output = System.out;
+
     @Override
     public <T> CommandPackageBuilder using(String key, T value) {
         if (key == null || !key.equals("puts")) {

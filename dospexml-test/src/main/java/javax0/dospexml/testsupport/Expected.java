@@ -1,12 +1,12 @@
-package javax0.dospexml.support;
+package javax0.dospexml.testsupport;
 
 import javax0.dospexml.api.AllNodesProcessing;
+import javax0.dospexml.api.Command;
 import javax0.dospexml.api.CommandContext;
 import javax0.dospexml.api.CommandResult;
-import javax0.dospexml.api.NamedCommand;
 import org.w3c.dom.Node;
 
-class Expected implements NamedCommand<Void>, AllNodesProcessing {
+class Expected implements Command<Void>, AllNodesProcessing {
     @Override
     public CommandResult<Void> execute(CommandContext ctx) {
         final var nodes = ctx.nodeList();

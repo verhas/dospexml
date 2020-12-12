@@ -1,15 +1,23 @@
 package javax0.dospexml.commands.basic;
 
-import javax0.dospexml.api.NamedCommand;
-import javax0.dospexml.commands.AbstractStringCommand;
+import javax0.dospexml.api.AllNodesProcessing;
+import javax0.dospexml.api.Command;
+import javax0.dospexml.api.CommandContext;
+import javax0.dospexml.api.CommandResult;
+import javax0.dospexml.support.Convert;
 
-public class Concat extends AbstractStringCommand implements NamedCommand<String> {
+import java.util.List;
+
+public class Concat implements Command<String>, AllNodesProcessing {
+
     @Override
-    public String evaluate(String... strings) {
+    public CommandResult<String> evaluate(CommandContext ctx, List<CommandResult<?>> results) {
+
         final var sb = new StringBuilder();
-        for (final var string : strings) {
+        for (final var result : results) {
+            final var string = Convert.toString(result);
             sb.append(string);
         }
-        return sb.toString();
+        return CommandResult.simple(sb.toString(), String.class);
     }
 }

@@ -1,4 +1,5 @@
 <Script xmlns="dospex:basic" xmlns:t="test">
+    <t:DisplayName>Not reverses a boolean true to false and the other way around</t:DisplayName>
     <t:Expected>123</t:Expected>
     <Let name="x">
         <Integer>0</Integer>

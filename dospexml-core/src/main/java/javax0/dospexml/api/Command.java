@@ -37,43 +37,15 @@ public interface Command<RET> {
         }
     }
 
-    class DefaultArgumentManager implements ArgumentManager {
-        private static final ArgumentManager instance = new DefaultArgumentManager();
-    }
-
-    class AllNodesProcessingArgumentManager implements ArgumentManager {
-        private static final ArgumentManager instance = new AllNodesProcessingArgumentManager();
-
-        @Override
-        public boolean needsTextSegments() {
-            return true;
-        }
-    }
-
-    default ArgumentManager argumentManager() {
-        if (this instanceof AllNodesProcessing) {
-            return AllNodesProcessingArgumentManager.instance;
-        } else {
-            return DefaultArgumentManager.instance;
-        }
-    }
-
     default CommandResult<RET> execute(CommandContext ctx) {
         final var nodes = ctx.nodeList();
-        final var manager = argumentManager();
-        if (manager.min() >= 0 && manager.min() > nodes.size()) {
-            throw ctx.exception("Command {" + ctx.node().getNamespaceURI() + "}" + ctx.node().getLocalName() + " needs minimum " + manager.min() + " arguments and has " + nodes.size());
-        }
-        if (manager.max() >= 0 && manager.max() < nodes.size()) {
-            throw ctx.exception("Command {" + ctx.node().getNamespaceURI() + "}" + ctx.node().getLocalName() + " needs maximum " + manager.max() + " arguments and has " + nodes.size());
-        }
 
         final var results = new ArrayList<CommandResult<?>>();
         try (final var __ = ctx.processor().open()) {
             for (final var node : nodes) {
                 if (node.getNodeType() == Node.TEXT_NODE ||
                     node.getNodeType() == Node.CDATA_SECTION_NODE) {
-                    if (manager.needsTextSegments()) {
+                    if (this instanceof AllNodesProcessing) {
                         results.add(new TextNode(node.getTextContent()));
                     }
                 } else if (node.getNodeType() != Node.COMMENT_NODE
@@ -82,25 +54,10 @@ public interface Command<RET> {
                 }
             }
         }
-        argumentManager().validateArguments(results);
         return evaluate(ctx, results);
     }
 
-    interface ArgumentManager {
-        default int min() {
-            return -1;
-        }
-
-        default int max() {
-            return -1;
-        }
-
-        default boolean needsTextSegments() {
-            return false;
-        }
-
-        default void validateArguments(List<CommandResult<?>> results) {
-        }
+    default String name() {
+        return this.getClass().getSimpleName();
     }
-
 }

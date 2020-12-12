@@ -1,9 +1,10 @@
-<Script xmlns="dospex:basic">
-    <Expected xmlns="test"><![CDATA[The big brown box
+<Script xmlns="dospex:basic" xmlns:t="test">
+    <t:DisplayName>Concat strings together</t:DisplayName>
+    <t:Expected><![CDATA[The big brown box
             jumped over
             1
             lazy oven
-]]></Expected>
+]]></t:Expected>
     <Puts trim="true" trail="\n">
         <Concat>
             <String>The big brown box</String>

@@ -1,10 +1,10 @@
 package javax0.dospexml.commands.basic;
 
+import javax0.dospexml.api.Command;
 import javax0.dospexml.api.CommandContext;
 import javax0.dospexml.api.CommandResult;
-import javax0.dospexml.api.NamedCommand;
 
-public class Null implements NamedCommand<Object> {
+public class Null implements Command<Object> {
 
     @Override
     public CommandResult<Object> execute(CommandContext ctx) {

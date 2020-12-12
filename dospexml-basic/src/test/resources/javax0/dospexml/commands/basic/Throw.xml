@@ -1,10 +1,5 @@
-<!--
-
-The command `Throw` throws an exception during the execution.
-The command must not have any body.
-
--->
 <Script xmlns="dospex:basic" xmlns:t="test">
+    <t:DisplayName>Throw throws an exception</t:DisplayName>
     <t:Throws>
         <Throw>wops</Throw>
     </t:Throws>

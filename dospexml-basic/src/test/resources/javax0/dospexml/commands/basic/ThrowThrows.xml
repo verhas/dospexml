@@ -1,3 +1,6 @@
-<Script xmlns="dospex:basic">
-    <Throws xmlns="test"><Throw xmlns="dospex:basic">Message</Throw></Throws>
+<Script xmlns="dospex:basic" xmlns:t="test">
+    <t:DisplayName>Throw can throw a message</t:DisplayName>
+    <t:Throws>
+        <Throw>Message</Throw>
+    </t:Throws>
 </Script>

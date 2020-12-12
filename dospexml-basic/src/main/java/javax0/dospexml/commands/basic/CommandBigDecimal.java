@@ -1,26 +1,25 @@
 package javax0.dospexml.commands.basic;
 
+import javax0.dospexml.api.AllNodesProcessing;
+import javax0.dospexml.api.Command;
 import javax0.dospexml.api.CommandContext;
 import javax0.dospexml.api.CommandResult;
-import javax0.dospexml.api.NamedCommand;
-import javax0.dospexml.commands.TextArgumentManager;
 import javax0.dospexml.support.Convert;
+import javax0.dospexml.support.Trim;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-public class CommandBigDecimal implements NamedCommand<BigDecimal> {
-    public ArgumentManager argumentManager() {
-        return TextArgumentManager.INSTANCE;
-    }
+public class CommandBigDecimal implements Command<BigDecimal>, AllNodesProcessing {
 
     @Override
     public CommandResult<BigDecimal> evaluate(CommandContext ctx, List<CommandResult<?>> results) {
-        final var result = results.get(0).get();
+        final var trim = Trim.trim(results);
+        final var result = trim.get(0).get();
         if (result instanceof BigDecimal) {
-            return (CommandResult<BigDecimal>) results.get(0);
+            return (CommandResult<BigDecimal>) trim.get(0);
         }
-        return CommandResult.simple(Convert.toBigDecimal(results.get(0)));
+        return CommandResult.simple(Convert.toBigDecimal(trim.get(0)));
     }
 
     @Override

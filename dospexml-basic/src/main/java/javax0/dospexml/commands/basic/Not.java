@@ -1,12 +1,12 @@
 package javax0.dospexml.commands.basic;
 
+import javax0.dospexml.api.Command;
 import javax0.dospexml.api.CommandContext;
 import javax0.dospexml.api.CommandResult;
-import javax0.dospexml.api.NamedCommand;
 
 import java.util.List;
 
-public class Not implements NamedCommand<Boolean> {
+public class Not implements Command<Boolean> {
     @Override
     public CommandResult<Boolean> evaluate(CommandContext ctx, List<CommandResult<?>> results) {
         final var result = results.get(0);

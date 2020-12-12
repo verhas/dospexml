@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class DynamicQueryMap<K, V> implements AutoCloseable, Query<K, V> {
-public static DynamicQueryMap debugThis = null;
+    public static DynamicQueryMap debugThis = null;
     private MapHolder<K, V> head = null;
     private final Map<K, V> globalMap = new HashMap<>();
 
@@ -95,7 +95,7 @@ public static DynamicQueryMap debugThis = null;
 
     public void close() {
         if (head == null) {
-            throw new ExecutionException("There are too many "+DynamicQueryMap.class.getName()+" closes");
+            throw new ExecutionException("There are too many " + DynamicQueryMap.class.getName() + " closes");
         } else {
             head = head.parent;
         }

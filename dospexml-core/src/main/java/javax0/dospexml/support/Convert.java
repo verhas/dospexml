@@ -57,7 +57,7 @@ public class Convert {
     }
 
     public static String toString(CommandResult<?> result) {
-        return ""+result.get();
+        return "" + result.get();
     }
 
     public static String unescape(String literal) throws IOException {

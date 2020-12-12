@@ -13,7 +13,7 @@ public interface CommandContext {
     GlobalContext<?> NO_GLOBAL_CONTEXT = null;
 
     /**
-     * GLobal context is the data that connects the commands to the embedding application. The embedding application can
+     * Global context is the data that connects the commands to the embedding application. The embedding application can
      * create a global context object and pass it to the processor. This global context can contain an arbitrary
      * application specific object of the type {@code T}. This object can provide data storage and callbacks that helps
      * the integration with the embedding application.
@@ -187,7 +187,7 @@ public interface CommandContext {
      * Invokes the processor to process the node.
      *
      * @param node the node to process
-     * @param <T> the type we expect as a result
+     * @param <T>  the type we expect as a result
      * @return the result of the command execution
      */
     <T> CommandResult<T> process(Node node);

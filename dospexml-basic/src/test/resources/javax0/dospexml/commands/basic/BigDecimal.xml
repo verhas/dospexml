@@ -1,17 +1,28 @@
-<Script xmlns="dospex:basic">
-    <Expected xmlns="test"><![CDATA[1
+<Script xmlns="dospex:basic" xmlns:t="test">
+    <t:DisplayName>Create BigDecimal numbers from Integer, Long, Double, BigDecimal, and String</t:DisplayName>
+    <t:Expected><![CDATA[1
         1
         1.0
         1
         1
         1
-        0.0000]]></Expected>
+        0.0000]]></t:Expected>
     <Puts trim="true">
-        <BigDecimal><Integer>1</Integer></BigDecimal>
-        <BigDecimal><Long>1</Long></BigDecimal>
-        <BigDecimal><Double>1</Double></BigDecimal>
-        <BigDecimal><BigDecimal>1</BigDecimal></BigDecimal>
-        <BigDecimal><String>1</String></BigDecimal>
+        <BigDecimal>
+            <String>1</String>
+        </BigDecimal>
+        <BigDecimal>
+            <Integer>1</Integer>
+        </BigDecimal>
+        <BigDecimal>
+            <Long>1</Long>
+        </BigDecimal>
+        <BigDecimal>
+            <Double>1</Double>
+        </BigDecimal>
+        <BigDecimal>
+            <BigDecimal>1</BigDecimal>
+        </BigDecimal>
         <BigDecimal><![CDATA[1]]></BigDecimal>
         <BigDecimal>0000.0000</BigDecimal>
     </Puts>

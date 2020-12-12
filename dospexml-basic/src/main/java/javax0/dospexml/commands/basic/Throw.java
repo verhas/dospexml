@@ -1,35 +1,35 @@
 package javax0.dospexml.commands.basic;
 
 import javax0.dospexml.api.AllNodesProcessing;
+import javax0.dospexml.api.Command;
 import javax0.dospexml.api.CommandContext;
 import javax0.dospexml.api.CommandResult;
-import javax0.dospexml.api.NamedCommand;
 
 import java.util.List;
 
-public class Throw implements NamedCommand<Void>, AllNodesProcessing {
+public class Throw implements Command<Void>, AllNodesProcessing {
     @Override
     public CommandResult<Void> evaluate(CommandContext ctx, List<CommandResult<?>> results) {
         final var klass = ctx.parameter("class").map(Throw::forName).orElse(null);
         final var message = ctx.parameter("message").orElse(null);
         if (klass != null) {
             if (Throwable.class.isAssignableFrom(klass)) {
-                sthrow(newInstance(ctx, klass,message));
-            }else{
-                sthrow(ctx.exception("Throw wanted to throw "+klass.getName()+" but it is not Throwable"));
+                sthrow(newInstance(ctx, klass, message));
+            } else {
+                sthrow(ctx.exception("Throw wanted to throw " + klass.getName() + " but it is not Throwable"));
             }
-        }else {
+        } else {
             if (results.size() > 0) {
                 throw ctx.exception("" + results.get(0).get());
             } else {
-                throw  ctx.exception("");
+                throw ctx.exception("");
             }
         }
         throw sthrow(null);
     }
 
     private static <E extends Throwable> RuntimeException sthrow(Throwable t) throws E {
-        throw (E)t;
+        throw (E) t;
     }
 
     private Throwable newInstance(CommandContext ctx, Class klass, String message) {

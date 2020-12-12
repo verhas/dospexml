@@ -1,7 +1,6 @@
 package javax0.dospexml.engine;
 
 import javax0.dospexml.api.Command;
-import javax0.dospexml.api.NamedCommand;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +18,7 @@ public class CommandRegister implements AutoCloseable {
         stack.remove(stack.size() - 1);
     }
 
-    public void register(String uri, NamedCommand<?>... commands) {
+    public void register(String uri, Command<?>... commands) {
         for (final var command : commands) {
             register(uri, command.name(), command);
         }

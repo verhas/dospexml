@@ -1,15 +1,15 @@
 package javax0.dospexml.commands.basic;
 
+import javax0.dospexml.api.Command;
 import javax0.dospexml.api.CommandContext;
 import javax0.dospexml.api.CommandResult;
 import javax0.dospexml.api.ExecutionException;
-import javax0.dospexml.api.NamedCommand;
 import javax0.dospexml.commandtools.Xml;
 import org.w3c.dom.Node;
 
 import java.util.Optional;
 
-public class If implements NamedCommand<Object> {
+public class If implements Command<Object> {
 
     public CommandResult<Object> execute(CommandContext ctx) {
         Node conditionNode = Xml.child(ctx.node(), ctx.nameSpace().orElse(null), "condition")

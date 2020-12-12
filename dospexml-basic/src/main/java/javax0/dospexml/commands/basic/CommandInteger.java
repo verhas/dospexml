@@ -1,22 +1,19 @@
 package javax0.dospexml.commands.basic;
 
+import javax0.dospexml.api.AllNodesProcessing;
+import javax0.dospexml.api.Command;
 import javax0.dospexml.api.CommandContext;
 import javax0.dospexml.api.CommandResult;
-import javax0.dospexml.api.NamedCommand;
-import javax0.dospexml.commands.TextArgumentManager;
 import javax0.dospexml.support.Convert;
+import javax0.dospexml.support.Trim;
 
 import java.util.List;
 
-public class CommandInteger implements NamedCommand<Integer> {
-
-    public ArgumentManager argumentManager() {
-        return TextArgumentManager.INSTANCE;
-    }
+public class CommandInteger implements Command<Integer>, AllNodesProcessing {
 
     @Override
     public CommandResult<Integer> evaluate(CommandContext ctx, List<CommandResult<?>> results) {
-        final var result = results.get(0);
+        final var result = Trim.trim(results).get(0);
         if (result.type() == Integer.class) {
             return (CommandResult<Integer>) result;
         }

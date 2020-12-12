@@ -1,4 +1,5 @@
 <Script xmlns="dospex:basic" xmlns:t="test">
+    <t:DisplayName>Subroutine calls and dynamic local variables</t:DisplayName>
     <t:Expected><![CDATA[Before calling
 Argument preparation calling
 I am in the subroutine, argument is

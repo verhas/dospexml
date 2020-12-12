@@ -1,4 +1,4 @@
-package javax0.dospexml.support;
+package javax0.dospexml.testsupport;
 
 @FunctionalInterface
 public interface TriConsumer {

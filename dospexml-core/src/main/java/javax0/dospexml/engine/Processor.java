@@ -1,5 +1,6 @@
 package javax0.dospexml.engine;
 
+import javax0.dospexml.api.AllNodesProcessing;
 import javax0.dospexml.api.CommandContext;
 import javax0.dospexml.api.CommandResult;
 import javax0.dospexml.api.Query;
@@ -28,7 +29,7 @@ public class Processor implements javax0.dospexml.api.Processor {
         final var command = register.get(node.getNamespaceURI(), node.getLocalName())
             .orElseThrow(() -> new SimpleCommandContext(this, node, globalContext, false)
                 .exception("Command {" + node.getNamespaceURI() + "}" + node.getLocalName() + " is not found"));
-        final var ctx = new SimpleCommandContext(this, node, globalContext, command.argumentManager().needsTextSegments());
+        final var ctx = new SimpleCommandContext(this, node, globalContext, command instanceof AllNodesProcessing);
         return command.execute(ctx);
     }
 

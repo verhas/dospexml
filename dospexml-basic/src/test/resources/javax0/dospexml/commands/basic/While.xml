@@ -1,4 +1,5 @@
 <Script xmlns="dospex:basic" xmlns:t="test">
+    <t:DisplayName>Loop why a condition is true</t:DisplayName>
     <t:Expected>123</t:Expected>
     <Let name="x">
         <Integer>0</Integer>

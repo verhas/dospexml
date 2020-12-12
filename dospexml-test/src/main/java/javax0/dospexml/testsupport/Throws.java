@@ -1,11 +1,11 @@
-package javax0.dospexml.support;
+package javax0.dospexml.testsupport;
 
+import javax0.dospexml.api.Command;
 import javax0.dospexml.api.CommandContext;
 import javax0.dospexml.api.CommandResult;
 import javax0.dospexml.api.ExecutionException;
-import javax0.dospexml.api.NamedCommand;
 
-public class Throws implements NamedCommand<Void> {
+public class Throws implements Command<Void> {
 
     @Override
     public CommandResult<Void> execute(CommandContext ctx) {

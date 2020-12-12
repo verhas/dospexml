@@ -1,9 +1,9 @@
 package javax0.dospexml.commands.basic;
 
+import javax0.dospexml.api.Command;
 import javax0.dospexml.api.CommandContext;
 import javax0.dospexml.api.CommandResult;
 import javax0.dospexml.api.ExecutionException;
-import javax0.dospexml.api.NamedCommand;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.function.Predicate;
 
 public class Compare {
 
-    public static class Equals implements NamedCommand<Boolean> {
+    public static class Equals implements Command<Boolean> {
         public CommandResult<Boolean> evaluate(CommandContext ctx, List<CommandResult<?>> results) {
             for (int i = 0; i < results.size() - 1; i++) {
                 final var a = results.get(i).get();
@@ -65,25 +65,25 @@ public class Compare {
         return CommandResult.TRUE;
     }
 
-    public static class Less implements NamedCommand<Boolean> {
+    public static class Less implements Command<Boolean> {
         public CommandResult<Boolean> evaluate(CommandContext ctx, List<CommandResult<?>> results) {
             return compare(results, name(), (a, b) -> a < b, (i) -> i < 0);
         }
     }
 
-    public static class LessOrEqual implements NamedCommand<Boolean> {
+    public static class LessOrEqual implements Command<Boolean> {
         public CommandResult<Boolean> evaluate(CommandContext ctx, List<CommandResult<?>> results) {
             return compare(results, name(), (a, b) -> a <= b, (i) -> i <= 0);
         }
     }
 
-    public static class Greater implements NamedCommand<Boolean> {
+    public static class Greater implements Command<Boolean> {
         public CommandResult<Boolean> evaluate(CommandContext ctx, List<CommandResult<?>> results) {
             return compare(results, name(), (a, b) -> a > b, (i) -> i > 0);
         }
     }
 
-    public static class GreaterOrEqual implements NamedCommand<Boolean> {
+    public static class GreaterOrEqual implements Command<Boolean> {
         public CommandResult<Boolean> evaluate(CommandContext ctx, List<CommandResult<?>> results) {
             return compare(results, name(), (a, b) -> a >= b, (i) -> i >= 0);
         }

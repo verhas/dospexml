@@ -1,11 +1,11 @@
 package javax0.dospexml.commands.basic;
 
+import javax0.dospexml.api.Command;
 import javax0.dospexml.api.CommandContext;
 import javax0.dospexml.api.CommandResult;
-import javax0.dospexml.api.NamedCommand;
 import javax0.dospexml.commandtools.Xml;
 
-public class Let implements NamedCommand<Void> {
+public class Let implements Command<Void> {
 
     public CommandResult<Void> execute(CommandContext ctx) {
         try (final var __ = ctx.processor().open()) {

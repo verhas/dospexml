@@ -1,49 +1,83 @@
 = Domain Specific xmLanguage
 
-If you want to implement scripting into your application you have to choose a scripting engine, or you can create your own solution.
-Creating your own solution needs lexical analysis, syntax analysis, building an abstract syntax tree (AST) and then an engine that executes the AST.
+If you want to implement scripting into your application, you have to choose a scripting engine, or you can create your own solution.
+Creating your own solution needs lexical analysis, syntax analysis, building an abstract syntax tree (AST), and then an engine that executes the AST.
 
-This Domain Specific xmLanguage (DOSPEX) is an engine that implements the second part of the scripting.
-To make it as universal as possible the AST used is the XML Document structure.
-It also means that you can use and XML parser as a simple front-end, which may be good for some specific cases.
+This Domain-Specific xmLanguage (DOSPEX) is an engine that implements the second part of the scripting.
+To make it as universal as possible, the AST used is the XML document structure.
+It also means that you can use an XML parser as a simple front-end, which may be good for some specific cases.
 Dospex is not meant to be scripted in XML, except for experimenting and for testing.
-If you need XML scripting with a rich set of commands you may have a look at Apache Jelly.
+If you need XML scripting with a rich set of commands, you may have a look at Apache Jelly.
 
 Dospex is mainly to embed into an application.
-It has a limited set of commands that the embedding application may opt to use or totally ignore.
+To do that you only need one dependency in your Maven `pom.xml`:
+
+    <dependency>
+        <groupId>com.javax0</groupId>
+        <artifactId>dospexml-core</artifactId>
+        <version>1.0.0</version>
+    </dependency>
+
+The basic command package has a limited set of commands that the embedding application may opt to use or totally ignore.
+If you want to use the basic set of commands, you may also use the library
+
+    <dependency>
+        <groupId>com.javax0</groupId>
+        <artifactId>dospexml-basic</artifactId>
+        <version>1.0.0</version>
+    </dependency>
+
 Embedding application can easily define their own commands.
-A typical application uses a subset of the provided commands that provide basic programming constructs, like
+You may opt to use the test support library to test your own commands:
 
-* variable handling
+    <dependency>
+        <groupId>com.javax0</groupId>
+        <artifactId>dospexml-test</artifactId>
+        <version>1.0.0</version>
+        <scope>test</scope>
+    </dependency>
 
-* loop constructs
+A typical application uses a subset of the provided basic commands that provide basic programming constructs, like
 
-* conditional execution
+* variable handling,
 
-* basic arithmetic
+* loop constructs,
 
-and add the domain specific command.
+* conditional execution,
 
-A typical embedding application will use the scripting with these simple steps:
+* basic arithmetic.
+
+The application typically also adds domain-specific command.
+
+The typical embedding application will use the scripting with these simple steps:
 
 1. Load the script from some source.
 
 2. Create a scripting processor object
 
-3. Register some of the shipped commands and some local commands.
+3. Register some shipped commands and some local commands.
 
 4. Execute the script.
 
 The following code shows these steps.
 
-[source,java]
-----
-final org.w3c.dom.Document doc = ... get the document from some source ...
-try (final var processor = new Processor(null)) {
-    Register.with(processor).registerBasicCommands("dospex:basic");
-    processor.commandRegister().register("myApp:namespace", new MyCommand());
-    processor.process(doc);
-}
-----
+// use snippet */sampleInvocation trim
+```java
+// load the script from the source
+final var iostream = this.getClass().getResourceAsStream("Add.xml");
+final var doc = new XmlInput(iostream).getDocument();
 
+// create a script processor
+final var p = new Processor(null);
+
+// register commands
+new CommandsBuilder().with(p).nameSpace("dospex:basic").register();
+        
+// execute the script
+p.process(doc);
+```
+
+The libraries are extremely lightweight.
+The core engine consists of only 22 Java files including the API interfaces, and the implementation files.
+This
 

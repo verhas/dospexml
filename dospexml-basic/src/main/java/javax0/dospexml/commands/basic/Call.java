@@ -1,12 +1,12 @@
 package javax0.dospexml.commands.basic;
 
+import javax0.dospexml.api.Command;
 import javax0.dospexml.api.CommandContext;
 import javax0.dospexml.api.CommandResult;
-import javax0.dospexml.api.NamedCommand;
 import javax0.dospexml.commandtools.Xml;
 import org.w3c.dom.Node;
 
-public class Call implements NamedCommand<Object> {
+public class Call implements Command<Object> {
 
     @Override
     public CommandResult<Object> execute(CommandContext ctx) {

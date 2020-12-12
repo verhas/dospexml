@@ -6,6 +6,7 @@ import javax0.dospexml.api.Processor;
 public class CommandsBuilder implements CommandPackageBuilder {
     private Processor processor = null;
     private String nameSpace = "";
+
     @Override
     public CommandPackageBuilder with(Processor p) {
         processor = p;

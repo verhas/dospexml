@@ -1,0 +1,24 @@
+<!-- adoc
+
+The command `Add` can add together two or more numbers.
+
+The numbers can be `BigDecimal`, `Double`, `Long` or `Integer` numbers.
+If there are any `BigDecimal` numbers in the arguments then the result and the calculation will be executed using `BigDecimals`.
+If there are no `BigDecimal` numbers in the arguments then the calculation will be performed using `Double`, `Long` or `Integer` in this order.
+The last case is, when all arguments are `Integer`.
+Only in this case the calculation will be performed using `Integer` arithmetic.
+
+The arguments of the operation come from children nodes.
+For example the following code fragment adds two `BigDecimal` values:
+
+-->
+<Script xmlns="dospex:basic">
+    <Puts trim="true">
+        <!-- snippet add_BigDecimals-->
+        <Add>
+            <BigDecimal>1</BigDecimal>
+            <BigDecimal>1</BigDecimal>
+        </Add>
+        <!-- end snippet -->
+    </Puts>
+</Script>

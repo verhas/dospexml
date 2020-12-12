@@ -1,5 +1,6 @@
-<Script xmlns="dospex:basic">
-    <Expected xmlns="test">39916800</Expected>
+<Script xmlns="dospex:basic" xmlns:t="test">
+    <t:DisplayName>Multiply Long values</t:DisplayName>
+    <t:Expected>39916800</t:Expected>
     <Let name="x">
         <Long>2</Long>
     </Let>

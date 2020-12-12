@@ -1,4 +1,4 @@
-package javax0.dospexml.support;
+package javax0.dospexml.testsupport;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;

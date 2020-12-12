@@ -1,4 +1,5 @@
 <Script xmlns="dospex:basic" xmlns:t="test">
+    <t:DisplayName>Assign value to variables</t:DisplayName>
     <t:Expected><![CDATA[53
 54
 53

@@ -1,7 +1,7 @@
-package javax0.dospexml.support;
+package javax0.dospexml.testsupport;
 
+import javax0.dospexml.api.Command;
 import javax0.dospexml.api.CommandPackageBuilder;
-import javax0.dospexml.api.NamedCommand;
 import javax0.dospexml.engine.Processor;
 import javax0.dospexml.input.Input;
 import javax0.dospexml.input.XmlInput;
@@ -12,52 +12,23 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
-import java.util.Objects;
 
 public class Test {
     final String uri;
-    final NamedCommand<?>[] commands;
+    final Command<?>[] commands;
 
-    private Test(String uri, NamedCommand<?>[] commands) {
+    private Test(String uri, Command<?>[] commands) {
         this.uri = uri;
         this.commands = commands;
     }
 
     public static Test with() {
-        return new Test("", new NamedCommand[0]);
+        return new Test("", new Command[0]);
     }
 
-    public static Test with(String uri, NamedCommand<?>... commands) {
+    public static Test with(String uri, Command<?>... commands) {
         return new Test(uri, commands);
     }
-
-    public void execute(Object test) throws Exception {
-        for (final var file : Objects.requireNonNull(new File(test.getClass().getResource(".").getPath())
-            .listFiles((dir, name) -> name.endsWith(".xml")))) {
-            final String[] result;
-            try {
-                result = execute(file);
-            } catch (Exception e) {
-                enrichException(file, e);
-                throw e;
-            }
-            final var expected = result[0];
-            final var actual = result[1];
-            if (expected == null && actual == null) {
-                return;
-            }
-            if (expected == null || !expected.equals(actual)) {
-                throw new AssertionError("expected: " + expected + " but was: " + actual);
-            }
-        }
-    }
-
-    private static void enrichException(File file, Exception e) {
-        final var trace = e.getStackTrace();
-        trace[0] = new StackTraceElement(file.getName(), trace[0].getMethodName(), trace[0].getFileName(), trace[0].getLineNumber());
-        e.setStackTrace(trace);
-    }
-
 
     public String[] execute(File file) throws Exception {
         final ByteArrayOutputStream baos;

@@ -1,8 +1,8 @@
 package javax0.dospexml.commands.basic;
 
+import javax0.dospexml.api.Command;
 import javax0.dospexml.api.CommandContext;
 import javax0.dospexml.api.CommandResult;
-import javax0.dospexml.api.NamedCommand;
 import javax0.dospexml.support.Convert;
 
 import java.math.BigDecimal;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public class Add implements NamedCommand<Number> {
+public class Add implements Command<Number> {
 
     @Override
     public CommandResult<Number> evaluate(CommandContext ctx, List<CommandResult<?>> results) {

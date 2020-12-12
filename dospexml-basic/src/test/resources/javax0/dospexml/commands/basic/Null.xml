@@ -1,4 +1,5 @@
 <Script xmlns="dospex:basic" xmlns:t="test">
+    <t:DisplayName>Null gets null</t:DisplayName>
     <t:Expected>Null is null</t:Expected>
     <Let name="x">
         <Null/>
@@ -10,7 +11,9 @@
                 <Null/>
             </Equals>
         </condition>
-        <then><Puts><![CDATA[Null is ]]></Puts></then>
+        <then>
+            <Puts><![CDATA[Null is ]]></Puts>
+        </then>
     </If>
     <Puts trim="true">
         <Get name="x"/>

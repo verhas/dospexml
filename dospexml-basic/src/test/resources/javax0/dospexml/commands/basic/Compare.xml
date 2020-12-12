@@ -1,5 +1,6 @@
-<Script xmlns="dospex:basic">
-    <Expected xmlns="test"><![CDATA[165398 == 165398 Integer
+<Script xmlns="dospex:basic" xmlns:t="test">
+    <t:DisplayName>Compare different numbers and show that 'If' can select</t:DisplayName>
+    <t:Expected><![CDATA[165398 == 165398 Integer
 165398 == 165398 Long
 165398 == 165398 BigDecimal
 165398 == 165398 Double
@@ -35,7 +36,7 @@
 4 is not <= 3 Double
 3 is <= 4 BigDecimal
 4 is not < 3 BigDecimal
-]]></Expected>
+]]></t:Expected>
     <Block name="Equals">
         <If>
             <condition>

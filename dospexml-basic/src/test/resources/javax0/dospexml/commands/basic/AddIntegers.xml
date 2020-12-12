@@ -1,5 +1,6 @@
-<Script xmlns="dospex:basic">
-    <Expected xmlns="test">2</Expected>
+<Script xmlns="dospex:basic" xmlns:t="test">
+    <t:DisplayName>Add two Integer numbers together</t:DisplayName>
+    <t:Expected>2</t:Expected>
     <Puts trim="true">
         <Add>
             <Integer>1</Integer>

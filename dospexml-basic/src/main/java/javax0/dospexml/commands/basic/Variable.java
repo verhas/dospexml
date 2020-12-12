@@ -1,11 +1,11 @@
 package javax0.dospexml.commands.basic;
 
+import javax0.dospexml.api.Command;
 import javax0.dospexml.api.CommandContext;
 import javax0.dospexml.api.CommandResult;
 import javax0.dospexml.api.ExecutionException;
-import javax0.dospexml.api.NamedCommand;
 
-public class Variable implements NamedCommand<Variable.VariableHolder> {
+public class Variable implements Command<Variable.VariableHolder> {
     public CommandResult<VariableHolder> execute(CommandContext ctx) {
         final var name = ctx.parameter("name").orElseThrow(() -> new ExecutionException("Variable must have name"));
         final var localityString = ctx.parameter("locality").orElse("default");

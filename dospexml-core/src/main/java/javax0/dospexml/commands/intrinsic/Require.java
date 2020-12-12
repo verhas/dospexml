@@ -1,12 +1,12 @@
 package javax0.dospexml.commands.intrinsic;
 
+import javax0.dospexml.api.Command;
 import javax0.dospexml.api.CommandContext;
 import javax0.dospexml.api.CommandResult;
 import javax0.dospexml.api.ExecutionException;
-import javax0.dospexml.api.NamedCommand;
 import javax0.dospexml.api.Version;
 
-public class Require implements NamedCommand<Void> {
+public class Require implements Command<Void> {
     @Override
     public CommandResult<Void> execute(CommandContext ctx) {
         final var requiredVersion = ctx.intParameter("version").orElseThrow(() -> new ExecutionException("Require command needs an int version attribute"));
